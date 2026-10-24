@@ -78,7 +78,9 @@ export function Projects() {
                 ) : (
                   <span className="flex-[0_1_240px] text-lg font-medium">{project.name}</span>
                 )}
-                <span className="flex-[1_1_320px] text-muted">{project.description}</span>
+                <span className="min-w-0 flex-[1_1_320px] text-muted md:truncate" title={project.description}>
+                  {project.description}
+                </span>
                 <span className="text-sm text-subtle">{project.tag}</span>
               </>
             )

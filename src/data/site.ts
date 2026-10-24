@@ -59,23 +59,23 @@ export type OtherProject = {
 export const otherProjects: OtherProject[] = [
   {
     name: 'Ontario Holiday Calendar',
-    description: 'Statutory holidays and other dates, 1997 to 2030. Subscribe at cal.adityajain.ca.',
+    description: 'Statutory holidays and other dates from 1997 to 2030.',
     tag: 'ICS',
     href: 'https://cal.adityajain.ca',
   },
   {
     name: 'Date Tracker',
-    description: 'A small app for logging past dates and saving ideas for future ones.',
+    description: 'Logs past dates and saves ideas for future ones.',
     tag: 'React',
   },
   {
     name: 'Spotify Tray Tool',
-    description: "Watches what's playing on my desktop and opens genre searches for liked songs.",
+    description: 'Opens genre searches for songs I like as they play.',
     tag: 'Python',
   },
   {
     name: 'Paladins Mod for CK3',
-    description: 'A Crusader Kings III mod that adds four new men-at-arms units.',
+    description: 'Adds four new men-at-arms units to Crusader Kings III.',
     tag: 'Game mod',
   },
 ]
