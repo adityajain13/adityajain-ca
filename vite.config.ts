@@ -17,6 +17,7 @@ export default defineConfig({
         cal: page('./cal/index.html'),
         genre: page('./genre/index.html'),
         dates: page('./dates/index.html'),
+        paladins: page('./paladins/index.html'),
         datesApp: page('./dates-app/index.html'),
       },
     },

@@ -6,6 +6,7 @@
 //   atlas.adityajain.ca      → /atlas/ page
 //   vibething.adityajain.ca  → /vibething/ page
 //   genre.adityajain.ca      → /genre/ page (Spotify Genre Searcher)
+//   paladins.adityajain.ca   → /paladins/ page (Crusader Kings III mod)
 //   dates.adityajain.ca      → /dates/ public page; /log and /edit open the private
 //                              app (/dates-app/), /api/* is its API and /auth/* its sign-in
 //                              (worker/dates.ts). Cloudflare Access protects /auth/login.
@@ -27,6 +28,7 @@ const PAGES: Record<string, string> = {
   cal: '/cal/',
   genre: '/genre/',
   dates: '/dates/',
+  paladins: '/paladins/',
 }
 
 // Paths on dates.adityajain.ca that open the private app.

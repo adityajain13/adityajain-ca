@@ -30,6 +30,7 @@ Connected to Cloudflare via Workers Builds: every push to `main` runs `npm run b
 | `vibething.adityajain.ca` | `vibething/index.html` |
 | `genre.adityajain.ca` | `genre/index.html` (Spotify Genre Searcher) |
 | `dates.adityajain.ca` | `dates/index.html` public page; `/log` and `/edit` serve `dates-app/index.html`; `/api/*` is the private API (`worker/dates.ts`) |
+| `paladins.adityajain.ca` | `paladins/index.html` (Crusader Kings III mod) |
 | `cal.adityajain.ca` | `cal/index.html`, plus `/calendar.ics` fetched live from the `adityajain13/holidays` repo (cached for an hour) |
 
 Each host must be added as a custom domain on the Worker: Settings → Domains & Routes.
