@@ -58,23 +58,23 @@ export type OtherProject = {
 
 export const otherProjects: OtherProject[] = [
   {
-    name: 'Date tracker',
-    description: 'A small app for logging past dates and saving ideas for future ones.',
-    tag: 'React',
-  },
-  {
-    name: 'Ontario holiday calendar',
+    name: 'Ontario Holiday Calendar',
     description: 'Statutory holidays and other dates, 1997 to 2030. Subscribe at cal.adityajain.ca.',
     tag: 'ICS',
     href: 'https://cal.adityajain.ca',
   },
   {
-    name: 'Spotify tray tool',
+    name: 'Date Tracker',
+    description: 'A small app for logging past dates and saving ideas for future ones.',
+    tag: 'React',
+  },
+  {
+    name: 'Spotify Tray Tool',
     description: "Watches what's playing on my desktop and opens genre searches for liked songs.",
     tag: 'Python',
   },
   {
-    name: 'Paladins mod for CK3',
+    name: 'Paladins Mod for CK3',
     description: 'A Crusader Kings III mod that adds four new men-at-arms units.',
     tag: 'Game mod',
   },
