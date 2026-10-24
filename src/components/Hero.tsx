@@ -12,7 +12,7 @@ export function Hero() {
       <div className="mt-9 flex flex-wrap gap-3">
         <a
           href="#projects"
-          className="inline-flex min-h-11 items-center rounded-lg bg-accent px-[18px] text-[15px] font-semibold text-ink transition hover:brightness-110"
+          className="inline-flex min-h-11 items-center rounded-lg bg-accent px-[18px] text-[15px] font-semibold text-white transition hover:brightness-110"
         >
           View projects
         </a>
