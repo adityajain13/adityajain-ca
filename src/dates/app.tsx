@@ -1,5 +1,5 @@
 // Private app at dates.adityajain.ca/log (view) and /edit (edit).
-// Cloudflare Access handles sign-in before this page loads; the API decides the role.
+// Signing in goes through /auth/login (Cloudflare Access email code), which sets a session cookie.
 
 import { StrictMode, useEffect, useState } from 'react'
 import { createRoot } from 'react-dom/client'
@@ -11,6 +11,7 @@ import type { DatesDoc, Me } from './types'
 
 type State =
   | { kind: 'loading' }
+  | { kind: 'signedOut' }
   | { kind: 'denied' }
   | { kind: 'error' }
   | { kind: 'ready'; me: Me; doc: DatesDoc }
@@ -24,7 +25,39 @@ function Message({ title, children }: { title: string; children?: React.ReactNod
   )
 }
 
-const signOut = '/cdn-cgi/access/logout'
+const signOut = '/auth/logout'
+
+function SignIn({ next }: { next: '/log' | '/edit' }) {
+  const [remember, setRemember] = useState(false)
+  return (
+    <div className="mx-auto max-w-sm px-6 pt-28 text-center">
+      <p className="mb-4 text-[11px] tracking-[5px] uppercase" style={{ color: PINK }}>
+        our little story
+      </p>
+      <h1 className="mb-3 text-[44px] leading-tight font-normal">Date Log</h1>
+      <p className="mb-8 font-sans text-[15px] leading-relaxed text-[#999]">
+        Sign in with your email. You’ll get a one-time code.
+      </p>
+      <a
+        href={`/auth/login?next=${next}${remember ? '&remember=1' : ''}`}
+        className="inline-flex min-h-11 items-center rounded-lg px-5 font-sans text-[15px] font-semibold text-[#0d0d0d] transition hover:brightness-110"
+        style={{ background: PINK }}
+      >
+        Sign in
+      </a>
+      <label className="mt-6 flex cursor-pointer items-center justify-center gap-2.5 font-sans text-[14px] text-[#bbb]">
+        <input
+          type="checkbox"
+          checked={remember}
+          onChange={(e) => setRemember(e.target.checked)}
+          className="size-4 accent-[#ff6b9d]"
+        />
+        Stay signed in on this device for a year
+      </label>
+      <p className="mt-3 font-sans text-[12px] text-[#666]">Leave this off on shared or public computers.</p>
+    </div>
+  )
+}
 
 function App() {
   const wantsEdit = window.location.pathname.startsWith('/edit')
@@ -35,6 +68,9 @@ function App() {
     ;(async () => {
       try {
         const [meRes, docRes] = await Promise.all([fetch('/api/me'), fetch('/api/dates')])
+        if (meRes.status === 401 || docRes.status === 401) {
+          return setState({ kind: new URLSearchParams(window.location.search).has('denied') ? 'denied' : 'signedOut' })
+        }
         if (meRes.status === 403 || docRes.status === 403) return setState({ kind: 'denied' })
         if (!meRes.ok || !docRes.ok) return setState({ kind: 'error' })
         setState({ kind: 'ready', me: await meRes.json(), doc: await docRes.json() })
@@ -45,13 +81,14 @@ function App() {
   }, [wantsEdit])
 
   if (state.kind === 'loading') return <Message title="Loading…" />
+  if (state.kind === 'signedOut') return <SignIn next={wantsEdit ? '/edit' : '/log'} />
   if (state.kind === 'error') return <Message title="Something went wrong">Couldn’t load the log. Try refreshing.</Message>
   if (state.kind === 'denied') {
     return (
       <Message title="No access">
-        This account isn’t on the list for this log.{' '}
-        <a href={signOut} style={{ color: PINK }}>
-          Sign in with a different email
+        That email isn’t on the list for this log.{' '}
+        <a href="/cdn-cgi/access/logout" style={{ color: PINK }}>
+          Try a different email
         </a>
         .
       </Message>

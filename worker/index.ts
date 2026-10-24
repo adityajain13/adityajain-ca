@@ -7,12 +7,12 @@
 //   vibething.adityajain.ca  → /vibething/ page
 //   genre.adityajain.ca      → /genre/ page (Spotify Genre Searcher)
 //   dates.adityajain.ca      → /dates/ public page; /log and /edit open the private
-//                              app (/dates-app/), and /api/* is its API (worker/dates.ts).
-//                              Cloudflare Access protects /log, /edit and /api.
+//                              app (/dates-app/), /api/* is its API and /auth/* its sign-in
+//                              (worker/dates.ts). Cloudflare Access protects /auth/login.
 //   cal.adityajain.ca        → /cal/ page, plus /calendar.ics served live from
 //                              the adityajain13/holidays repo
 
-import { handleDatesApi, type DatesEnv } from './dates'
+import { handleDatesApi, handleDatesAuth, type DatesEnv } from './dates'
 
 interface Env extends DatesEnv {
   ASSETS: { fetch(request: Request): Promise<Response> }
@@ -63,6 +63,7 @@ export default {
     // Local testing with `wrangler dev`: the dates API and app work on localhost too.
     if (isLocalHost(host)) {
       if (url.pathname.startsWith('/api/')) return handleDatesApi(request, env, url)
+      if (url.pathname.startsWith('/auth/')) return handleDatesAuth(request, env, url)
       if (isDatesAppPath(url.pathname)) return env.ASSETS.fetch(new Request(new URL(DATES_APP, url), request))
     }
 
@@ -76,6 +77,7 @@ export default {
 
     if (sub === 'dates') {
       if (url.pathname.startsWith('/api/')) return handleDatesApi(request, env, url)
+      if (url.pathname.startsWith('/auth/')) return handleDatesAuth(request, env, url)
       if (isDatesAppPath(url.pathname)) {
         const res = await env.ASSETS.fetch(new Request(new URL(DATES_APP, url), request))
         return noStore(res)
