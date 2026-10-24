@@ -6,10 +6,15 @@
 //   atlas.adityajain.ca      → /atlas/ page
 //   vibething.adityajain.ca  → /vibething/ page
 //   genre.adityajain.ca      → /genre/ page (Spotify Genre Searcher)
+//   dates.adityajain.ca      → /dates/ public page; /log and /edit open the private
+//                              app (/dates-app/), and /api/* is its API (worker/dates.ts).
+//                              Cloudflare Access protects /log, /edit and /api.
 //   cal.adityajain.ca        → /cal/ page, plus /calendar.ics served live from
 //                              the adityajain13/holidays repo
 
-interface Env {
+import { handleDatesApi, type DatesEnv } from './dates'
+
+interface Env extends DatesEnv {
   ASSETS: { fetch(request: Request): Promise<Response> }
 }
 
@@ -21,7 +26,13 @@ const PAGES: Record<string, string> = {
   vibething: '/vibething/',
   cal: '/cal/',
   genre: '/genre/',
+  dates: '/dates/',
 }
+
+// Paths on dates.adityajain.ca that open the private app.
+const DATES_APP = '/dates-app/'
+const isDatesAppPath = (p: string) => /^\/(log|edit)(\/|$)/.test(p)
+const isLocalHost = (h: string) => h === 'localhost' || h === '127.0.0.1'
 
 const CALENDAR_SOURCE = 'https://raw.githubusercontent.com/adityajain13/holidays/main/holidays.ics'
 const CALENDAR_PATHS = new Set(['/calendar.ics', '/holidays.ics'])
@@ -41,9 +52,18 @@ export default {
 
     // On the main domain, send /atlas/, /vibething/ and /cal/ to their subdomains.
     if (host === APEX) {
+      if (url.pathname === DATES_APP.slice(0, -1) || url.pathname.startsWith(DATES_APP)) {
+        return Response.redirect(`https://dates.${APEX}/log`, 301)
+      }
       const sub = Object.keys(PAGES).find((s) => url.pathname === `/${s}` || url.pathname.startsWith(`/${s}/`))
       if (sub) return Response.redirect(`https://${sub}.${APEX}/`, 301)
       return env.ASSETS.fetch(request)
+    }
+
+    // Local testing with `wrangler dev`: the dates API and app work on localhost too.
+    if (isLocalHost(host)) {
+      if (url.pathname.startsWith('/api/')) return handleDatesApi(request, env, url)
+      if (isDatesAppPath(url.pathname)) return env.ASSETS.fetch(new Request(new URL(DATES_APP, url), request))
     }
 
     const sub = host.endsWith(`.${APEX}`) ? host.slice(0, -(APEX.length + 1)) : null
@@ -54,11 +74,25 @@ export default {
 
     if (sub === 'cal' && CALENDAR_PATHS.has(url.pathname)) return serveCalendar()
 
+    if (sub === 'dates') {
+      if (url.pathname.startsWith('/api/')) return handleDatesApi(request, env, url)
+      if (isDatesAppPath(url.pathname)) {
+        const res = await env.ASSETS.fetch(new Request(new URL(DATES_APP, url), request))
+        return noStore(res)
+      }
+    }
+
     if (isFile(url.pathname)) return env.ASSETS.fetch(request)
 
     // Every other path on a project subdomain shows that project's page.
     return env.ASSETS.fetch(new Request(new URL(page, url), request))
   },
+}
+
+function noStore(res: Response): Response {
+  const out = new Response(res.body, res)
+  out.headers.set('cache-control', 'no-store')
+  return out
 }
 
 async function serveCalendar(): Promise<Response> {

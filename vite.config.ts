@@ -16,6 +16,8 @@ export default defineConfig({
         vibething: page('./vibething/index.html'),
         cal: page('./cal/index.html'),
         genre: page('./genre/index.html'),
+        dates: page('./dates/index.html'),
+        datesApp: page('./dates-app/index.html'),
       },
     },
   },
