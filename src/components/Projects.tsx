@@ -59,7 +59,25 @@ export function Projects() {
           {otherProjects.map((project) => {
             const row = (
               <>
-                <span className="flex-[0_1_240px] text-lg font-medium">{project.name}</span>
+                {project.href ? (
+                  <span className="inline-flex flex-[0_1_240px] items-center gap-1.5 text-lg font-medium text-accent underline-offset-4 group-hover:underline">
+                    {project.name}
+                    <svg
+                      aria-hidden="true"
+                      viewBox="0 0 16 16"
+                      className="size-4 shrink-0 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.75"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M5 11 11 5M6 5h5v5" />
+                    </svg>
+                  </span>
+                ) : (
+                  <span className="flex-[0_1_240px] text-lg font-medium">{project.name}</span>
+                )}
                 <span className="flex-[1_1_320px] text-muted">{project.description}</span>
                 <span className="text-sm text-subtle">{project.tag}</span>
               </>
@@ -69,7 +87,7 @@ export function Projects() {
             return (
               <li key={project.name}>
                 {project.href ? (
-                  <a href={project.href} className={`${rowClass} transition-colors hover:bg-surface`}>
+                  <a href={project.href} className={`${rowClass} group transition-colors hover:bg-surface`}>
                     {row}
                   </a>
                 ) : (
