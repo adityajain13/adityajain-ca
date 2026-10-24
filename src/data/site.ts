@@ -128,8 +128,3 @@ export const resume = {
     { group: 'Tools', items: 'Git, Azure DevOps, CI/CD pipelines, Jira' },
   ],
 }
-
-export const currently = {
-  updated: 'October 2026',
-  items: ['Working on VibeThing', 'Adding features to the date tracker', 'Building this site'],
-}
