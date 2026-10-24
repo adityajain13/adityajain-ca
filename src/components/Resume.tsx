@@ -1,4 +1,4 @@
-import { currently, resume } from '../data/site'
+import { resume } from '../data/site'
 
 function SideHeading({ children }: { children: string }) {
   return <h3 className="mb-3 text-sm font-medium tracking-wide text-subtle uppercase">{children}</h3>
@@ -81,15 +81,6 @@ export function Resume() {
             </ul>
           </div>
 
-          <div className="rounded-xl border border-line bg-surface p-6">
-            <h3 className="text-lg font-semibold">Currently</h3>
-            <p className="mb-3 text-sm text-subtle">Last updated {currently.updated}</p>
-            <ul className="flex list-disc flex-col gap-1.5 pl-[18px] text-fg-soft marker:text-accent">
-              {currently.items.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          </div>
         </aside>
       </div>
     </section>
