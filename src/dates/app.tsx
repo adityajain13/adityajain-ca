@@ -1,5 +1,5 @@
-// Private app at dates.adityajain.ca/log (view) and /edit (edit).
-// Signing in goes through /auth/login (Cloudflare Access email code), which sets a session cookie.
+// Private app at adityajain.ca/dates/log (view) and /dates/edit (edit).
+// Signing in goes through /dates/auth/login (Cloudflare Access email code), which sets a session cookie.
 
 import { StrictMode, useEffect, useState } from 'react'
 import { createRoot } from 'react-dom/client'
@@ -25,9 +25,9 @@ function Message({ title, children }: { title: string; children?: React.ReactNod
   )
 }
 
-const signOut = '/auth/logout'
+const signOut = '/dates/auth/logout'
 
-function SignIn({ next }: { next: '/log' | '/edit' }) {
+function SignIn({ next }: { next: '/dates/log' | '/dates/edit' }) {
   const [remember, setRemember] = useState(false)
   return (
     <div className="mx-auto max-w-sm px-6 pt-28 text-center">
@@ -39,7 +39,7 @@ function SignIn({ next }: { next: '/log' | '/edit' }) {
         Sign in with your email. You’ll get a one-time code.
       </p>
       <a
-        href={`/auth/login?next=${next}${remember ? '&remember=1' : ''}`}
+        href={`/dates/auth/login?next=${next}${remember ? '&remember=1' : ''}`}
         className="inline-flex min-h-11 items-center rounded-lg px-5 font-sans text-[15px] font-semibold text-[#0d0d0d] transition hover:brightness-110"
         style={{ background: PINK }}
       >
@@ -60,14 +60,14 @@ function SignIn({ next }: { next: '/log' | '/edit' }) {
 }
 
 function App() {
-  const wantsEdit = window.location.pathname.startsWith('/edit')
+  const wantsEdit = window.location.pathname.startsWith('/dates/edit')
   const [state, setState] = useState<State>({ kind: 'loading' })
 
   useEffect(() => {
     document.title = wantsEdit ? 'Edit · Date Log' : 'Date Log'
     ;(async () => {
       try {
-        const [meRes, docRes] = await Promise.all([fetch('/api/me'), fetch('/api/dates')])
+        const [meRes, docRes] = await Promise.all([fetch('/dates/api/me'), fetch('/dates/api/dates')])
         if (meRes.status === 401 || docRes.status === 401) {
           return setState({ kind: new URLSearchParams(window.location.search).has('denied') ? 'denied' : 'signedOut' })
         }
@@ -81,7 +81,7 @@ function App() {
   }, [wantsEdit])
 
   if (state.kind === 'loading') return <Message title="Loading…" />
-  if (state.kind === 'signedOut') return <SignIn next={wantsEdit ? '/edit' : '/log'} />
+  if (state.kind === 'signedOut') return <SignIn next={wantsEdit ? '/dates/edit' : '/dates/log'} />
   if (state.kind === 'error') return <Message title="Something went wrong">Couldn’t load the log. Try refreshing.</Message>
   if (state.kind === 'denied') {
     return (
@@ -100,7 +100,7 @@ function App() {
   if (wantsEdit && me.role !== 'editor') {
     return (
       <Message title="View only">
-        You can view the log but not edit it. <a href="/log" style={{ color: PINK }}>Go to the log</a>.
+        You can view the log but not edit it. <a href="/dates/log" style={{ color: PINK }}>Go to the log</a>.
       </Message>
     )
   }
@@ -114,7 +114,7 @@ function App() {
       footer={
         <nav className="mt-14 flex flex-wrap justify-center gap-x-6 gap-y-2 font-sans text-[13px] text-[#777]">
           {me.role === 'editor' ? (
-            <a href="/edit" style={{ color: PINK }}>
+            <a href="/dates/edit" style={{ color: PINK }}>
               Edit the log
             </a>
           ) : null}

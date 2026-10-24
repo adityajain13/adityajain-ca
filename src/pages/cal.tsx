@@ -4,7 +4,7 @@ import '@fontsource-variable/geist'
 import '../index.css'
 import { ButtonLink, PageHero, PageSection, Steps, SubpageLayout, inlineLink } from '../components/Subpage'
 
-const FEED = 'https://cal.adityajain.ca/calendar.ics'
+const FEED = 'https://adityajain.ca/cal/calendar.ics'
 const WEBCAL = FEED.replace('https://', 'webcal://')
 const GOOGLE = `https://calendar.google.com/calendar/render?cid=${encodeURIComponent(WEBCAL)}`
 const SOURCE = 'https://github.com/adityajain13/holidays'

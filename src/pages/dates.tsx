@@ -58,7 +58,7 @@ function DatesPage() {
           View on GitHub
         </ButtonLink>
         <a
-          href="/log"
+          href="/dates/log"
           className="inline-flex min-h-11 items-center rounded-lg border border-line-strong px-[18px] text-[15px] transition-colors hover:border-subtle"
         >
           Sign in
