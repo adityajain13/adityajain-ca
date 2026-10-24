@@ -7,7 +7,7 @@ export const site = {
   links: {
     github: 'https://github.com/adityajain13',
     linkedin: '', // TODO: add your LinkedIn URL
-    firefoxAddons: '', // TODO: add your Firefox Add-ons profile URL
+    firefoxAddons: 'https://addons.mozilla.org/firefox/addon/atlas-new-tab/',
   },
 }
 
@@ -15,8 +15,8 @@ export type FeaturedProject = {
   name: string
   description: string
   tags: string[]
-  link: { label: string; href: string }
-  image?: string // put screenshots in /public/projects/ and reference as '/projects/x.png'
+  links: { label: string; href: string }[]
+  image?: string // put screenshots in /public/projects/ and reference as '/projects/x.webp'
   imageAlt: string
 }
 
@@ -26,15 +26,19 @@ export const featuredProjects: FeaturedProject[] = [
     description:
       'My fork of GlanceThing that turns a retired Spotify Car Thing into a desk display connected to my PC.',
     tags: ['React', 'Electron'],
-    link: { label: 'View on GitHub', href: 'https://github.com/adityajain13/VibeThing' },
-    imageAlt: 'Car Thing on the desk running VibeThing',
+    links: [{ label: 'View on GitHub', href: 'https://github.com/adityajain13/VibeThing' }],
+    image: '/projects/vibething.webp',
+    imageAlt: 'VibeThing home screen on the Car Thing, showing the current song, calendar and weather',
   },
   {
     name: 'Atlas',
     description:
       'A new-tab page for Firefox with Unsplash wallpapers, multi-engine search and a customizable icon grid. Published on Firefox Add-ons, now at version 1.4.3.',
     tags: ['Browser extension', 'Unsplash API'],
-    link: { label: 'View on Firefox Add-ons', href: '' }, // TODO: add the AMO listing URL
+    links: [
+      { label: 'Get it on Firefox Add-ons', href: 'https://addons.mozilla.org/firefox/addon/atlas-new-tab/' },
+      { label: 'View on GitHub', href: 'https://github.com/adityajain13/AtlasNewTab' },
+    ],
     imageAlt: 'Atlas new tab with wallpaper and icon grid',
   },
 ]
@@ -54,9 +58,9 @@ export const otherProjects: OtherProject[] = [
   },
   {
     name: 'Ontario holiday calendar',
-    description: 'Statutory holidays and other dates, 1997 to 2030. Subscribe at cal.adityajain.ca.',
+    description: 'Statutory holidays and other dates, 1997 to 2030, as a calendar file you can subscribe to.',
     tag: 'ICS',
-    href: 'https://cal.adityajain.ca',
+    href: 'https://github.com/adityajain13/holidays',
   },
   {
     name: 'Spotify tray tool',
