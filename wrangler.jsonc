@@ -1,10 +1,15 @@
-// Cloudflare Workers config: serves the Vite build output as static assets.
+// Cloudflare Workers config.
+// worker/index.ts routes each subdomain; Vite's build output in dist/ is served as static assets.
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "adityajain-ca",
+  "main": "worker/index.ts",
   "compatibility_date": "2026-10-01",
   "assets": {
     "directory": "./dist",
-    "not_found_handling": "single-page-application"
+    "binding": "ASSETS",
+    // The worker needs to see every request so it can route by hostname.
+    "run_worker_first": true,
+    "not_found_handling": "404-page"
   }
 }

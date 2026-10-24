@@ -26,8 +26,11 @@ export const featuredProjects: FeaturedProject[] = [
     description:
       'My fork of GlanceThing that turns a retired Spotify Car Thing into a desk display connected to my PC.',
     tags: ['React', 'Electron'],
-    links: [{ label: 'View on GitHub', href: 'https://github.com/adityajain13/VibeThing' }],
-    image: '/projects/vibething.webp',
+    links: [
+      { label: 'Project page', href: 'https://vibething.adityajain.ca' },
+      { label: 'View on GitHub', href: 'https://github.com/adityajain13/VibeThing' },
+    ],
+    image: '/projects/vibething/carthing-home.webp',
     imageAlt: 'VibeThing home screen on the Car Thing, showing the current song, calendar and weather',
   },
   {
@@ -36,6 +39,7 @@ export const featuredProjects: FeaturedProject[] = [
       'A new-tab page for Firefox with Unsplash wallpapers, multi-engine search and a customizable icon grid. Published on Firefox Add-ons, now at version 1.4.3.',
     tags: ['Browser extension', 'Unsplash API'],
     links: [
+      { label: 'Project page', href: 'https://atlas.adityajain.ca' },
       { label: 'Get it on Firefox Add-ons', href: 'https://addons.mozilla.org/firefox/addon/atlas-new-tab/' },
       { label: 'View on GitHub', href: 'https://github.com/adityajain13/AtlasNewTab' },
     ],
@@ -60,9 +64,9 @@ export const otherProjects: OtherProject[] = [
   },
   {
     name: 'Ontario holiday calendar',
-    description: 'Statutory holidays and other dates, 1997 to 2030, as a calendar file you can subscribe to.',
+    description: 'Statutory holidays and other dates, 1997 to 2030. Subscribe at cal.adityajain.ca.',
     tag: 'ICS',
-    href: 'https://github.com/adityajain13/holidays',
+    href: 'https://cal.adityajain.ca',
   },
   {
     name: 'Spotify tray tool',
