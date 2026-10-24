@@ -77,8 +77,9 @@ export const otherProjects: OtherProject[] = [
   },
   {
     name: 'Paladins Mod for CK3',
-    description: 'Adds four new men-at-arms units to Crusader Kings III.',
+    description: 'Four overpowered, player-only men-at-arms for Crusader Kings III.',
     tag: 'Game mod',
+    href: 'https://paladins.adityajain.ca',
   },
 ]
 
