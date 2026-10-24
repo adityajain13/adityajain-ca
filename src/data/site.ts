@@ -87,45 +87,51 @@ export const otherProjects: OtherProject[] = [
 // To offer the PDF too, put it in public/ (e.g. public/resume.pdf) and set pdf: '/resume.pdf'.
 export const resume = {
   pdf: '',
+  summary:
+    'Front-end developer with 5+ years building and owning the customer-facing e-commerce experience for tsc.ca, the Rogers-owned national retailer with about 800K monthly visits.',
   experience: [
     {
-      company: 'Rogers Communications',
-      role: 'Frontend Engineer',
+      company: 'Rogers Communications · TSC (tsc.ca)',
+      role: '.NET & Front-End Developer',
       dates: 'May 2021 – Present',
       points: [
-        'Led the migration of 10+ Angular components to React.',
-        'Build reusable React components with TypeScript and Tailwind that standardize UI across pages and features.',
-        'Integrated Contentful CMS and Algolia search, and wrote custom Contentful plugins for complex content workflows.',
-        'Work with backend teams on REST APIs and keep quality up through code reviews and SonarQube.',
+        'One of two front-end developers for tsc.ca. I own features end to end, from Figma mocks to production, shipping a major feature and 2–4 enhancements every sprint.',
+        'Migrated the entire legacy Angular front end to React and TypeScript, including the shopping bag, My Account and the live TV schedule.',
+        'Redesigned the Algolia-powered product search page as part of a customer retention push that increased add-to-cart rates.',
+        'Built front-end features for the TSC Marketplace, which lets hundreds of third-party vendors sell on tsc.ca.',
+        'Wrote custom Contentful plugins so the content team can configure site components without waiting for a deployment.',
+        'Built reusable, screen-reader-tested React, TypeScript and Tailwind components used across the site, and fixed dozens of Lighthouse performance findings.',
+        'Mentor new developers, represent front end in sprint planning, and maintain C#/.NET services such as internal gift card tools.',
       ],
     },
     {
       company: 'Royal Bank of Canada',
-      role: 'Developer',
+      role: 'Developer (Co-op)',
       dates: 'May – Aug 2019',
-      points: ['Built REST APIs and reusable API templates in C# and .NET Core.'],
+      points: ['Built REST APIs in C# and .NET Core, and reusable API templates that cut duplicated code across the team.'],
     },
     {
       company: 'Royal Bank of Canada',
-      role: 'Technical Analyst',
+      role: 'Technical Analyst (Co-op)',
       dates: 'May – Aug 2017',
-      points: ['Wrote a Java webhook framework to automate builds and supported cloud deployment and QA workflows.'],
-    },
-    {
-      company: 'Design Tech',
-      role: 'IT & Administrative Consultant',
-      dates: '2012 – 2015',
-      points: ['Helped build client websites.'],
+      points: ['Built a Java webhook framework that automated manual CI steps, and rewrote the team’s technical documentation.'],
     },
   ],
   education: [
-    { degree: 'MSc Computer Science (Artificial Intelligence)', school: 'University of York, UK', year: '2024' },
+    {
+      degree: 'MSc Computer Science (Artificial Intelligence)',
+      school: 'University of York',
+      year: '2024',
+      note: 'Part-time online while working full-time. Capstone: an AI smart mirror that suggests outfits from the live weather.',
+    },
     { degree: 'BSc Computer Science', school: 'University of Windsor', year: '2020' },
   ],
-  certifications: ['Microsoft Azure Fundamentals', 'Microsoft Azure AI Fundamentals'],
+  certifications: ['Microsoft Azure Fundamentals (AZ-900)', 'Microsoft Azure AI Fundamentals (AI-900)'],
   skills: [
-    { group: 'Frontend', items: 'React, TypeScript, JavaScript, HTML, CSS, Tailwind CSS' },
-    { group: 'Backend & data', items: 'C#, .NET Core, REST APIs, SQL, Contentful, Algolia' },
-    { group: 'Tools', items: 'Git, Azure DevOps, CI/CD pipelines, Jira' },
+    { group: 'Front end', items: 'React, TypeScript, JavaScript, HTML, CSS, Tailwind CSS, React Query, Webpack, Vite' },
+    { group: 'CMS, search & APIs', items: 'Contentful (incl. custom plugins), Algolia, REST APIs' },
+    { group: 'Back end', items: 'C#, .NET / .NET Core, Node.js, SQL, Python' },
+    { group: 'Practices', items: 'Performance (Lighthouse), accessibility, A/B testing, feature flags, code review, Agile' },
+    { group: 'Tools', items: 'Git, Azure DevOps, Azure, CI/CD, SonarQube, Docker, Figma, Jira, AI coding assistants' },
   ],
 }
