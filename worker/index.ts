@@ -72,7 +72,10 @@ export default {
     const sub = host.endsWith(`.${APEX}`) ? host.slice(0, -(APEX.length + 1)) : null
     const page = sub ? PAGES[sub] : undefined
 
-    // Unknown hosts (e.g. the workers.dev preview URL) just get the static site.
+    // A subdomain that isn't a project (e.g. a typo) goes to the homepage.
+    if (sub && !page) return Response.redirect(`https://${APEX}/`, 302)
+
+    // Other hosts (e.g. the workers.dev preview URL) just get the static site.
     if (!sub || !page) return env.ASSETS.fetch(request)
 
     if (sub === 'cal' && CALENDAR_PATHS.has(url.pathname)) return serveCalendar()

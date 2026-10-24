@@ -33,9 +33,9 @@ Connected to Cloudflare via Workers Builds: every push to `main` runs `npm run b
 | `paladins.adityajain.ca` | `paladins/index.html` (Crusader Kings III mod) |
 | `cal.adityajain.ca` | `cal/index.html`, plus `/calendar.ics` fetched live from the `adityajain13/holidays` repo (cached for an hour) |
 
-Each host must be added as a custom domain on the Worker: Settings → Domains & Routes.
+Hosting uses two Worker routes, `adityajain.ca/*` and `*.adityajain.ca/*`, with proxied DNS records `@` and `*` (AAAA `100::`). New subdomains need no dashboard changes. A subdomain that isn't in `PAGES` redirects to `adityajain.ca`.
 
-To add another project subdomain: create `<name>/index.html` and `src/pages/<name>.tsx`, add the entry to `vite.config.ts`, add `<name>` to `PAGES` in `worker/index.ts`, then add the custom domain.
+To add another project subdomain: create `<name>/index.html` and `src/pages/<name>.tsx`, add the entry to `vite.config.ts`, and add `<name>` to `PAGES` in `worker/index.ts`. The wildcard route picks it up automatically.
 
 Local preview of the Worker: `npm run build && npx wrangler dev`, then `curl -H "Host: atlas.adityajain.ca" localhost:8787`.
 
