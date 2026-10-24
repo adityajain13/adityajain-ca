@@ -16,9 +16,8 @@ npm run build    # outputs to dist/
 - **Colors and fonts:** the `@theme` block in `src/index.css`. The accent is `green-400`; change `--color-accent` to change it everywhere.
 - **Screenshots:** drop them in `public/projects/` and set `image: '/projects/vibething.png'` on the project in `site.ts`. Until then a placeholder box shows.
 
-## Deploy (Cloudflare Pages)
+## Deploy (Cloudflare Workers)
 
-1. Push this folder to a GitHub repo.
-2. Cloudflare dashboard → Workers & Pages → Create → Pages → connect the repo.
-3. Build command `npm run build`, output directory `dist`.
-4. Custom domains → add `adityajain.ca` (and `www`). With DNS on Cloudflare it sets the records for you.
+Connected to Cloudflare via Workers Builds: every push to `main` runs `npm run build` then `npx wrangler deploy`, which serves `dist/` as static assets (see `wrangler.jsonc`).
+
+Custom domain: Worker → Settings → Domains & Routes → add `adityajain.ca` (and `www`).
