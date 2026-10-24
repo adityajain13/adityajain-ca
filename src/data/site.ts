@@ -67,6 +67,7 @@ export const otherProjects: OtherProject[] = [
     name: 'Date Tracker',
     description: 'Logs past dates and saves ideas for future ones.',
     tag: 'React',
+    href: 'https://dates.adityajain.ca',
   },
   {
     name: 'Spotify Genre Searcher',

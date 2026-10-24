@@ -8,5 +8,7 @@
     "binding": "ASSETS",
     "run_worker_first": true,
     "not_found_handling": "404-page"
-  }
+  },
+  "kv_namespaces": [{ "binding": "DATES_KV" }],
+  "keep_vars": true
 }
