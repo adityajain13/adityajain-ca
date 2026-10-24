@@ -1,0 +1,33 @@
+@import 'tailwindcss';
+
+/* Design tokens — change the accent here and it updates sitewide. */
+@theme {
+  --font-sans: 'Geist Variable', ui-sans-serif, system-ui, sans-serif;
+
+  --color-accent: var(--color-green-400);
+
+  --color-ink: #0f0f0e;        /* page background */
+  --color-surface: #161615;    /* cards, the "Currently" box */
+  --color-placeholder: #1a1a18;
+  --color-line: #262624;       /* dividers */
+  --color-line-strong: #3a3936;
+
+  --color-fg: #edebe6;         /* primary text */
+  --color-fg-soft: #c9c7c1;    /* intro paragraph */
+  --color-muted: #b4b2ac;      /* secondary text */
+  --color-subtle: #8e8c86;     /* tags, dates */
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-ink font-sans text-fg antialiased;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-accent;
+  }
+}
