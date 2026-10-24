@@ -4,7 +4,7 @@
 @theme {
   --font-sans: 'Geist Variable', ui-sans-serif, system-ui, sans-serif;
 
-  --color-accent: var(--color-green-800);
+  --color-accent: var(--color-green-600);
 
   --color-ink: #0f0f0e;        /* page background */
   --color-surface: #161615;    /* cards, the "Currently" box */

@@ -1,12 +1,12 @@
 // All the site's content lives here. Edit this file to change copy, add
-// projects or posts — the components just render it.
+// projects or the resume — the components just render it.
 
 export const site = {
   name: 'Aditya Jain',
   email: 'aditya@adityajain.ca',
   links: {
     github: 'https://github.com/adityajain13',
-    linkedin: '', // TODO: add your LinkedIn URL
+    linkedin: 'https://www.linkedin.com/in/aditya-jain-a70ab8b2',
     firefoxAddons: 'https://addons.mozilla.org/firefox/addon/atlas-new-tab/',
   },
 }
@@ -82,17 +82,52 @@ export const otherProjects: OtherProject[] = [
   },
 ]
 
-export type Post = {
-  title: string
-  date?: string // e.g. '2026-11-02'; leave empty while it's a draft
-  href?: string
+// Resume shown on the homepage. Update this when the resume changes.
+// To offer the PDF too, put it in public/ (e.g. public/resume.pdf) and set pdf: '/resume.pdf'.
+export const resume = {
+  pdf: '',
+  experience: [
+    {
+      company: 'Rogers Communications',
+      role: 'Frontend Engineer',
+      dates: 'May 2021 – Present',
+      points: [
+        'Led the migration of 10+ Angular components to React.',
+        'Build reusable React components with TypeScript and Tailwind that standardize UI across pages and features.',
+        'Integrated Contentful CMS and Algolia search, and wrote custom Contentful plugins for complex content workflows.',
+        'Work with backend teams on REST APIs and keep quality up through code reviews and SonarQube.',
+      ],
+    },
+    {
+      company: 'Royal Bank of Canada',
+      role: 'Developer',
+      dates: 'May – Aug 2019',
+      points: ['Built REST APIs and reusable API templates in C# and .NET Core.'],
+    },
+    {
+      company: 'Royal Bank of Canada',
+      role: 'Technical Analyst',
+      dates: 'May – Aug 2017',
+      points: ['Wrote a Java webhook framework to automate builds and supported cloud deployment and QA workflows.'],
+    },
+    {
+      company: 'Design Tech',
+      role: 'IT & Administrative Consultant',
+      dates: '2012 – 2015',
+      points: ['Helped build client websites.'],
+    },
+  ],
+  education: [
+    { degree: 'MSc Computer Science (Artificial Intelligence)', school: 'University of York, UK', year: '2024' },
+    { degree: 'BSc Computer Science', school: 'University of Windsor', year: '2020' },
+  ],
+  certifications: ['Microsoft Azure Fundamentals', 'Microsoft Azure AI Fundamentals'],
+  skills: [
+    { group: 'Frontend', items: 'React, TypeScript, JavaScript, HTML, CSS, Tailwind CSS' },
+    { group: 'Backend & data', items: 'C#, .NET Core, REST APIs, SQL, Contentful, Algolia' },
+    { group: 'Tools', items: 'Git, Azure DevOps, CI/CD pipelines, Jira' },
+  ],
 }
-
-export const posts: Post[] = [
-  { title: 'Forking GlanceThing for the Car Thing' },
-  { title: 'Publishing a Firefox new-tab extension' },
-  { title: 'Making a calendar people can subscribe to' },
-]
 
 export const currently = {
   updated: 'October 2026',
