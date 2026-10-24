@@ -28,6 +28,7 @@ Connected to Cloudflare via Workers Builds: every push to `main` runs `npm run b
 | `www.adityajain.ca` | 301 redirect to `adityajain.ca` |
 | `atlas.adityajain.ca` | `atlas/index.html` |
 | `vibething.adityajain.ca` | `vibething/index.html` |
+| `genre.adityajain.ca` | `genre/index.html` (Spotify Genre Searcher) |
 | `cal.adityajain.ca` | `cal/index.html`, plus `/calendar.ics` fetched live from the `adityajain13/holidays` repo (cached for an hour) |
 
 Each host must be added as a custom domain on the Worker: Settings → Domains & Routes.
