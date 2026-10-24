@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState, type FormEvent, type ReactNode } 
 import { Check, Divider, FutureText, LogHeader, PINK, PastRow } from './DateLog'
 import {
   cleanLists,
+  normalizeImport,
   sortPast,
   validateLists,
   VIBES,
@@ -280,7 +281,7 @@ export function Editor({ me, initial }: { me: Me; initial: DatesDoc }) {
 
   const importJson = async (file: File) => {
     try {
-      const data = JSON.parse(await file.text()) as { past?: unknown; future?: unknown }
+      const data = normalizeImport(JSON.parse(await file.text()))
       const problem = validateLists(data.past, data.future)
       if (problem) return setStatus({ kind: 'error', message: `Couldn't import: ${problem}` })
       setPast(data.past as PastDate[])

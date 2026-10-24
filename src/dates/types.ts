@@ -93,3 +93,50 @@ export function cleanLists(past: PastDate[], future: FutureDate[]) {
     future: future.map(({ id, text, emoji, done }) => ({ id, text: text.trim(), emoji, done })),
   }
 }
+
+/**
+ * Turns an imported file into the current shape. Accepts this app's export
+ * ({ past, future }) and the original DateTracker format ({ pastDates, futureDates }
+ * with numeric chapter numbers and no ids).
+ */
+export function normalizeImport(data: unknown): { past: unknown; future: unknown } {
+  if (!data || typeof data !== 'object') return { past: null, future: null }
+  const d = data as Record<string, unknown>
+  const past = d.past ?? d.pastDates
+  const future = d.future ?? d.futureDates
+  if (!Array.isArray(past) || !Array.isArray(future)) return { past, future }
+
+  const used = new Set<string>()
+  const uniqueId = (preferred: string) => {
+    let id = preferred
+    for (let i = 2; used.has(id); i++) id = `${preferred}-${i}`
+    used.add(id)
+    return id
+  }
+
+  return {
+    past: past.map((p) => {
+      if (!p || typeof p !== 'object') return p
+      const e = p as Record<string, unknown>
+      const num = typeof e.num === 'number' || typeof e.num === 'string' ? String(e.num) : e.num
+      return {
+        id: uniqueId(typeof e.id === 'string' && e.id ? e.id : `p-${String(num).replace(/\./g, '-')}`),
+        num,
+        title: e.title,
+        emoji: typeof e.emoji === 'string' ? e.emoji : '',
+        vibe: e.vibe,
+      }
+    }),
+    future: future.map((f) => {
+      if (!f || typeof f !== 'object') return f
+      const e = f as Record<string, unknown>
+      const raw = typeof e.id === 'string' || typeof e.id === 'number' ? String(e.id) : ''
+      return {
+        id: uniqueId(raw.startsWith('f-') ? raw : `f-${raw || crypto.randomUUID()}`),
+        text: e.text,
+        emoji: typeof e.emoji === 'string' ? e.emoji : '',
+        done: typeof e.done === 'boolean' ? e.done : false,
+      }
+    }),
+  }
+}
