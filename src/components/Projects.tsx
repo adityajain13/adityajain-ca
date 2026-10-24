@@ -1,6 +1,8 @@
 import { featuredProjects, otherProjects, type FeaturedProject } from '../data/site'
 import { Section } from './Section'
 
+const isOwnSite = (href: string) => /^https:\/\/([a-z0-9-]+\.)?adityajain\.ca(\/|$)/.test(href)
+
 function ProjectImage({ project }: { project: FeaturedProject }) {
   if (project.image) {
     return (
@@ -39,8 +41,8 @@ export function Projects() {
                       <a
                         key={link.href}
                         href={link.href}
-                        target="_blank"
-                        rel="noreferrer"
+                        // Pages on adityajain.ca open in the same tab; other sites open in a new one.
+                        {...(isOwnSite(link.href) ? {} : { target: '_blank', rel: 'noreferrer' })}
                         className="text-[15px] text-accent underline-offset-4 hover:underline"
                       >
                         {link.label}
