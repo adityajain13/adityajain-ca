@@ -2,7 +2,7 @@ import { site } from '../data/site'
 
 const nav = [
   { label: 'Projects', href: '#projects' },
-  { label: 'Writing', href: '#writing' },
+  { label: 'Resume', href: '#resume' },
   { label: 'About', href: '#about' },
   { label: 'Contact', href: '#contact' },
 ]

@@ -62,7 +62,7 @@ export function ButtonLink({
 }) {
   const base = 'inline-flex min-h-11 items-center rounded-lg px-[18px] text-[15px] transition'
   const style = primary
-    ? 'bg-accent font-semibold text-white hover:brightness-110'
+    ? 'bg-accent font-semibold text-ink hover:brightness-110'
     : 'border border-line-strong hover:border-subtle'
   return (
     <a href={href} target="_blank" rel="noreferrer" className={`${base} ${style}`}>
