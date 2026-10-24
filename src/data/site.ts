@@ -86,7 +86,7 @@ export const otherProjects: OtherProject[] = [
 // Resume shown on the homepage. Update this when the resume changes.
 // To offer the PDF too, put it in public/ (e.g. public/resume.pdf) and set pdf: '/resume.pdf'.
 export const resume = {
-  pdf: '',
+  pdf: '/Aditya_Jain_Resume.pdf',
   summary:
     'Front-end developer with 5+ years building and owning the customer-facing e-commerce experience for tsc.ca, the Rogers-owned national retailer with about 800K monthly visits.',
   experience: [
