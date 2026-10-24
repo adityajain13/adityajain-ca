@@ -23,6 +23,8 @@ export function Resume() {
         ) : null}
       </div>
 
+      {resume.summary ? <p className="mb-10 max-w-[70ch] text-lg leading-relaxed text-fg-soft">{resume.summary}</p> : null}
+
       <div className="grid gap-12 md:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
         <div>
           <SideHeading>Experience</SideHeading>
@@ -55,6 +57,7 @@ export function Resume() {
                   <p className="text-sm text-muted">
                     {e.school} · {e.year}
                   </p>
+                  {'note' in e && e.note ? <p className="mt-1 text-sm leading-relaxed text-subtle">{e.note}</p> : null}
                 </li>
               ))}
             </ul>
@@ -80,7 +83,6 @@ export function Resume() {
               ))}
             </ul>
           </div>
-
         </aside>
       </div>
     </section>
