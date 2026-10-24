@@ -8,13 +8,13 @@ function ProjectImage({ project }: { project: FeaturedProject }) {
         src={project.image}
         alt={project.imageAlt}
         loading="lazy"
-        className="aspect-[16/10] w-full rounded-xl border border-line object-cover"
+        className="aspect-[5/3] w-full rounded-xl border border-line bg-black object-cover object-top"
       />
     )
   }
   // Placeholder until a screenshot is added in data/site.ts
   return (
-    <div className="flex aspect-[16/10] items-center justify-center rounded-xl border border-line bg-placeholder p-6 text-center text-[13px] text-subtle">
+    <div className="flex aspect-[5/3] items-center justify-center rounded-xl border border-line bg-placeholder p-6 text-center text-[13px] text-subtle">
       [Screenshot: {project.imageAlt}]
     </div>
   )
@@ -32,15 +32,20 @@ export function Projects() {
                 <h3 className="text-[22px] font-semibold tracking-tight">{project.name}</h3>
                 <p className="leading-relaxed text-muted">{project.description}</p>
                 <p className="mt-1 text-sm text-subtle">{project.tags.join(' · ')}</p>
-                {project.link.href ? (
-                  <a
-                    href={project.link.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="mt-1.5 w-fit text-[15px] text-accent underline-offset-4 hover:underline"
-                  >
-                    {project.link.label}
-                  </a>
+                {project.links.length > 0 ? (
+                  <div className="mt-1.5 flex flex-wrap gap-x-6 gap-y-1">
+                    {project.links.map((link) => (
+                      <a
+                        key={link.href}
+                        href={link.href}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-[15px] text-accent underline-offset-4 hover:underline"
+                      >
+                        {link.label}
+                      </a>
+                    ))}
+                  </div>
                 ) : null}
               </div>
             </article>
