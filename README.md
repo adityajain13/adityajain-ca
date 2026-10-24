@@ -41,7 +41,8 @@ Local preview of the Worker: `npm run build && npx wrangler dev`, then `curl -H 
 ## Private date tracker (dates.adityajain.ca)
 
 - `/log` shows the log, `/edit` edits it, `/api/me` and `/api/dates` are the API. Data is one JSON document in Workers KV (`DATES_KV`, created automatically on deploy).
-- **Cloudflare Access** protects `/log`, `/edit` and `/api` with one-time email codes. The Worker verifies the Access JWT and gives each email a role.
-- Worker secrets (Settings → Variables and Secrets, type *Secret*): `ACCESS_TEAM`, `ACCESS_AUD`, `DATES_EDITORS`, `DATES_VIEWERS` (comma-separated emails). If any are missing, the API refuses every request.
-- No personal data is in this repo. Use Export in the editor for backups.
-- Local testing: create `.dev.vars` (gitignored) with `DEV_AUTH_EMAIL`, `DATES_EDITORS` and `DATES_VIEWERS`, then `npm run build && npx wrangler dev` and open `http://127.0.0.1:8787/edit`. `DEV_AUTH_EMAIL` only works on localhost.
+- **Sign-in:** Cloudflare Access (one-time email codes) protects only `/auth/login`. That route verifies the Access JWT and sets the Worker's own signed `__Host-datelog` cookie: for a year if "Stay signed in" is ticked, otherwise until the browser closes (max one day). `/auth/logout` signs out.
+- **Roles** are checked on every request against `DATES_EDITORS` and `DATES_VIEWERS`, so removing an email revokes access immediately. Changing `DATES_SESSION_SECRET` signs everyone out.
+- Worker secrets (Settings → Variables and Secrets, type *Secret*): `ACCESS_TEAM`, `ACCESS_AUD`, `DATES_EDITORS`, `DATES_VIEWERS`, `DATES_SESSION_SECRET` (32+ random characters). If any are missing, sign-in and the API refuse every request.
+- No personal data is in this repo. Use Export in the editor for backups; Import also accepts the original `pastDates`/`futureDates` format.
+- Local testing: create `.dev.vars` (gitignored) with `DEV_AUTH_EMAIL`, `DATES_EDITORS`, `DATES_VIEWERS` and `DATES_SESSION_SECRET`, then `npm run build && npx wrangler dev` and open `http://127.0.0.1:8787/edit`. `DEV_AUTH_EMAIL` stands in for Access and only works on localhost.
