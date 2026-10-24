@@ -15,6 +15,7 @@ export default defineConfig({
         atlas: page('./atlas/index.html'),
         vibething: page('./vibething/index.html'),
         cal: page('./cal/index.html'),
+        genre: page('./genre/index.html'),
       },
     },
   },

@@ -69,9 +69,10 @@ export const otherProjects: OtherProject[] = [
     tag: 'React',
   },
   {
-    name: 'Spotify Tray Tool',
-    description: 'Opens genre searches for songs I like as they play.',
+    name: 'Spotify Genre Searcher',
+    description: 'Opens a genre search for each liked song as it plays.',
     tag: 'Python',
+    href: 'https://genre.adityajain.ca',
   },
   {
     name: 'Paladins Mod for CK3',

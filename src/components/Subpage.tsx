@@ -33,14 +33,17 @@ export function SubpageLayout({ children }: { children: ReactNode }) {
 export function PageHero({
   title,
   tagline,
+  icon,
   children,
 }: {
   title: string
   tagline: string
+  icon?: ReactNode
   children?: ReactNode
 }) {
   return (
     <section className="pt-16 pb-12 sm:pt-20 lg:pt-24">
+      {icon ? <div className="mb-8">{icon}</div> : null}
       <h1 className="text-[40px] leading-[1.05] font-semibold tracking-tighter sm:text-6xl">{title}</h1>
       <p className="mt-6 max-w-[60ch] text-lg leading-relaxed text-fg-soft sm:text-xl">{tagline}</p>
       {children ? <div className="mt-8 flex flex-wrap gap-3">{children}</div> : null}

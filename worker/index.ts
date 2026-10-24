@@ -5,6 +5,7 @@
 //   www.adityajain.ca        → 301 to adityajain.ca
 //   atlas.adityajain.ca      → /atlas/ page
 //   vibething.adityajain.ca  → /vibething/ page
+//   genre.adityajain.ca      → /genre/ page (Spotify Genre Searcher)
 //   cal.adityajain.ca        → /cal/ page, plus /calendar.ics served live from
 //                              the adityajain13/holidays repo
 
@@ -19,6 +20,7 @@ const PAGES: Record<string, string> = {
   atlas: '/atlas/',
   vibething: '/vibething/',
   cal: '/cal/',
+  genre: '/genre/',
 }
 
 const CALENDAR_SOURCE = 'https://raw.githubusercontent.com/adityajain13/holidays/main/holidays.ics'
