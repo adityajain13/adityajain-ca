@@ -20,30 +20,31 @@ npm run build    # outputs to dist/
 
 Connected to Cloudflare via Workers Builds: every push to `main` runs `npm run build` then `npx wrangler deploy`.
 
-`worker/index.ts` routes by hostname and serves `dist/` as static assets (see `wrangler.jsonc`):
+`worker/index.ts` routes requests and serves `dist/` as static assets (see `wrangler.jsonc`):
 
-| Host | Serves |
+| URL | Serves |
 | --- | --- |
-| `adityajain.ca` | Main site (`index.html`) |
-| `www.adityajain.ca` | 301 redirect to `adityajain.ca` |
-| `atlas.adityajain.ca` | `atlas/index.html` |
-| `vibething.adityajain.ca` | `vibething/index.html` |
-| `genre.adityajain.ca` | `genre/index.html` (Spotify Genre Searcher) |
-| `dates.adityajain.ca` | `dates/index.html` public page; `/log` and `/edit` serve `dates-app/index.html`; `/api/*` is the private API (`worker/dates.ts`) |
-| `paladins.adityajain.ca` | `paladins/index.html` (Crusader Kings III mod) |
-| `cal.adityajain.ca` | `cal/index.html`, plus `/calendar.ics` fetched live from the `adityajain13/holidays` repo (cached for an hour) |
+| `adityajain.ca/` | Main site (`index.html`) |
+| `adityajain.ca/atlas` | `atlas/index.html` |
+| `adityajain.ca/vibething` | `vibething/index.html` |
+| `adityajain.ca/genre` | `genre/index.html` (Spotify Genre Searcher) |
+| `adityajain.ca/paladins` | `paladins/index.html` (Crusader Kings III mod) |
+| `adityajain.ca/cal` | `cal/index.html`, plus `/cal/calendar.ics` fetched live from the `adityajain13/holidays` repo (cached for an hour) |
+| `adityajain.ca/dates` | `dates/index.html` public page; `/dates/log` and `/dates/edit` serve `dates-app/index.html`; `/dates/api/*` and `/dates/auth/*` are the private API and sign-in (`worker/dates.ts`) |
 
-Hosting uses two Worker routes, `adityajain.ca/*` and `*.adityajain.ca/*`, with proxied DNS records `@` and `*` (AAAA `100::`). New subdomains need no dashboard changes. A subdomain that isn't in `PAGES` redirects to `adityajain.ca`.
+Old subdomain links (`vibething.adityajain.ca/...`, `www.adityajain.ca`) redirect to the paths above; `cal.adityajain.ca/calendar.ics` is still served directly for existing calendar subscribers.
 
-To add another project subdomain: create `<name>/index.html` and `src/pages/<name>.tsx`, add the entry to `vite.config.ts`, and add `<name>` to `PAGES` in `worker/index.ts`. The wildcard route picks it up automatically.
+Hosting uses two Worker routes, `adityajain.ca/*` and `*.adityajain.ca/*`, with proxied DNS records `@` and `*` (AAAA `100::`).
 
-Local preview of the Worker: `npm run build && npx wrangler dev`, then `curl -H "Host: atlas.adityajain.ca" localhost:8787`.
+To add another project page: create `<name>/index.html` and `src/pages/<name>.tsx`, add the entry to `vite.config.ts`, and add `<name>` to `PAGES` in `worker/index.ts`.
+
+Local preview of the Worker: `npm run build && npx wrangler dev`, then open `http://127.0.0.1:8787/atlas`.
 
 ## Private date tracker (dates.adityajain.ca)
 
-- `/log` shows the log, `/edit` edits it, `/api/me` and `/api/dates` are the API. Data is one JSON document in Workers KV (`DATES_KV`, created automatically on deploy).
-- **Sign-in:** Cloudflare Access (one-time email codes) protects only `/auth/login`. That route verifies the Access JWT and sets the Worker's own signed `__Host-datelog` cookie: for a year if "Stay signed in" is ticked, otherwise until the browser closes (max one day). `/auth/logout` signs out.
+- `/dates/log` shows the log, `/dates/edit` edits it, `/dates/api/me` and `/dates/api/dates` are the API. Data is one JSON document in Workers KV (`DATES_KV`, created automatically on deploy).
+- **Sign-in:** Cloudflare Access (one-time email codes) protects only `/dates/auth/login`. That route verifies the Access JWT and sets the Worker's own signed `__Host-datelog` cookie: for a year if "Stay signed in" is ticked, otherwise until the browser closes (max one day). `/dates/auth/logout` signs out.
 - **Roles** are checked on every request against `DATES_EDITORS` and `DATES_VIEWERS`, so removing an email revokes access immediately. Changing `DATES_SESSION_SECRET` signs everyone out.
 - Worker secrets (Settings → Variables and Secrets, type *Secret*): `ACCESS_TEAM`, `ACCESS_AUD`, `DATES_EDITORS`, `DATES_VIEWERS`, `DATES_SESSION_SECRET` (32+ random characters). If any are missing, sign-in and the API refuse every request.
 - No personal data is in this repo. Use Export in the editor for backups; Import also accepts the original `pastDates`/`futureDates` format.
-- Local testing: create `.dev.vars` (gitignored) with `DEV_AUTH_EMAIL`, `DATES_EDITORS`, `DATES_VIEWERS` and `DATES_SESSION_SECRET`, then `npm run build && npx wrangler dev` and open `http://127.0.0.1:8787/edit`. `DEV_AUTH_EMAIL` stands in for Access and only works on localhost.
+- Local testing: create `.dev.vars` (gitignored) with `DEV_AUTH_EMAIL`, `DATES_EDITORS`, `DATES_VIEWERS` and `DATES_SESSION_SECRET`, then `npm run build && npx wrangler dev` and open `http://127.0.0.1:8787/dates/edit`. `DEV_AUTH_EMAIL` stands in for Access and only works on localhost.

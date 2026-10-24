@@ -1,11 +1,11 @@
-// API and sign-in for the private date tracker at dates.adityajain.ca.
+// API and sign-in for the private date tracker at adityajain.ca/dates.
 //
 // Sign-in:
-//   1. Cloudflare Access (email one-time codes) protects only /auth/login.
-//   2. /auth/login verifies the Access JWT, checks the email is on a list, and sets
+//   1. Cloudflare Access (email one-time codes) protects only /dates/auth/login.
+//   2. /dates/auth/login verifies the Access JWT, checks the email is on a list, and sets
 //      this Worker's own signed session cookie: for a year if the person ticked
 //      "stay signed in", otherwise until the browser closes (and at most a day).
-//   3. /log, /edit and /api check that cookie on every request. Roles are looked up
+//   3. /dates/log, /dates/edit and /dates/api check that cookie on every request. Roles are looked up
 //      from the email lists each time, so removing an email revokes access at once.
 //      Changing DATES_SESSION_SECRET signs everyone out.
 //
@@ -40,13 +40,13 @@ export interface DatesEnv {
 }
 
 const KEY = 'dates'
-const ORIGIN = 'https://dates.adityajain.ca'
+const ORIGIN = 'https://adityajain.ca'
 const MAX_BODY_BYTES = 512 * 1024
 
 const COOKIE = '__Host-datelog'
 const YEAR = 365 * 24 * 60 * 60
 const DAY = 24 * 60 * 60
-const AFTER_LOGIN = new Set(['/log', '/edit'])
+const AFTER_LOGIN = new Set(['/dates/log', '/dates/edit'])
 
 export async function handleDatesApi(request: Request, env: DatesEnv, url: URL): Promise<Response> {
   const email = await signedInEmail(request, env, url)
@@ -55,9 +55,9 @@ export async function handleDatesApi(request: Request, env: DatesEnv, url: URL):
   if (!role) return json({ error: 'This email is not allowed' }, 403)
   const me: Me = { email, role }
 
-  if (url.pathname === '/api/me' && request.method === 'GET') return json(me)
+  if (url.pathname === '/dates/api/me' && request.method === 'GET') return json(me)
 
-  if (url.pathname === '/api/dates') {
+  if (url.pathname === '/dates/api/dates') {
     if (request.method === 'GET') return json(await load(env))
 
     if (request.method === 'PUT') {
@@ -139,16 +139,16 @@ function roleFor(email: string, env: DatesEnv): Role | null {
   return null
 }
 
-/** /auth/login and /auth/logout. Access sits in front of /auth/login only. */
+/** /dates/auth/login and /dates/auth/logout. Access sits in front of /dates/auth/login only. */
 export async function handleDatesAuth(request: Request, env: DatesEnv, url: URL): Promise<Response> {
-  const next = AFTER_LOGIN.has(url.searchParams.get('next') ?? '') ? url.searchParams.get('next')! : '/log'
+  const next = AFTER_LOGIN.has(url.searchParams.get('next') ?? '') ? url.searchParams.get('next')! : '/dates/log'
 
-  if (url.pathname === '/auth/logout') {
+  if (url.pathname === '/dates/auth/logout') {
     // Clear our cookie, then end the Access session too.
-    return redirect(isLocal(url) ? '/log' : '/cdn-cgi/access/logout', clearCookie())
+    return redirect(isLocal(url) ? '/dates/log' : '/cdn-cgi/access/logout', clearCookie())
   }
 
-  if (url.pathname !== '/auth/login') return new Response('Not found', { status: 404 })
+  if (url.pathname !== '/dates/auth/login') return new Response('Not found', { status: 404 })
 
   let email: string | null = null
   if (env.DEV_AUTH_EMAIL && isLocal(url)) {
@@ -159,7 +159,7 @@ export async function handleDatesAuth(request: Request, env: DatesEnv, url: URL)
   }
   if (!email) return new Response('Sign-in is not set up correctly.', { status: 403 })
 
-  if (!roleFor(email, env)) return redirect('/log?denied=1', clearCookie())
+  if (!roleFor(email, env)) return redirect('/dates/log?denied=1', clearCookie())
 
   const secret = sessionSecret(env)
   if (!secret) return new Response('Sign-in is not set up correctly.', { status: 503 })

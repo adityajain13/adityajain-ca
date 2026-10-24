@@ -1,7 +1,8 @@
 import { featuredProjects, otherProjects, type FeaturedProject } from '../data/site'
 import { Section } from './Section'
 
-const isOwnSite = (href: string) => /^https:\/\/([a-z0-9-]+\.)?adityajain\.ca(\/|$)/.test(href)
+const isOwnSite = (href: string) =>
+  href.startsWith('/') || /^https:\/\/([a-z0-9-]+\.)?adityajain\.ca(\/|$)/.test(href)
 
 function ProjectImage({ project }: { project: FeaturedProject }) {
   if (project.image) {

@@ -245,7 +245,7 @@ export function Editor({ me, initial }: { me: Me; initial: DatesDoc }) {
   const save = async () => {
     setStatus({ kind: 'saving' })
     try {
-      const res = await fetch('/api/dates', {
+      const res = await fetch('/dates/api/dates', {
         method: 'PUT',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({ baseVersion: base.version, past, future }),
@@ -317,7 +317,7 @@ export function Editor({ me, initial }: { me: Me; initial: DatesDoc }) {
           >
             {statusText}
           </span>
-          <a href="/log" className="min-h-9 content-center rounded-md px-2.5 text-[13px] text-[#aaa] hover:bg-white/5 hover:text-[#f0ece0]">
+          <a href="/dates/log" className="min-h-9 content-center rounded-md px-2.5 text-[13px] text-[#aaa] hover:bg-white/5 hover:text-[#f0ece0]">
             View
           </a>
           <TextButton onClick={exportJson}>Export</TextButton>

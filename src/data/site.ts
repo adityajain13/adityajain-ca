@@ -27,7 +27,7 @@ export const featuredProjects: FeaturedProject[] = [
       'My fork of GlanceThing that turns a retired Spotify Car Thing into a desk display connected to my PC.',
     tags: ['React', 'Electron'],
     links: [
-      { label: 'Project page', href: 'https://vibething.adityajain.ca' },
+      { label: 'Project page', href: '/vibething' },
       { label: 'View on GitHub', href: 'https://github.com/adityajain13/VibeThing' },
     ],
     image: '/projects/vibething/carthing-home.webp',
@@ -39,7 +39,7 @@ export const featuredProjects: FeaturedProject[] = [
       'A new-tab page for Firefox with Unsplash wallpapers, multi-engine search and a customizable icon grid. Published on Firefox Add-ons, now at version 1.4.3.',
     tags: ['Browser extension', 'Unsplash API'],
     links: [
-      { label: 'Project page', href: 'https://atlas.adityajain.ca' },
+      { label: 'Project page', href: '/atlas' },
       { label: 'Get it on Firefox Add-ons', href: 'https://addons.mozilla.org/firefox/addon/atlas-new-tab/' },
       { label: 'View on GitHub', href: 'https://github.com/adityajain13/AtlasNewTab' },
     ],
@@ -61,25 +61,25 @@ export const otherProjects: OtherProject[] = [
     name: 'Ontario Holiday Calendar',
     description: 'Statutory holidays and other dates from 1997 to 2030.',
     tag: 'ICS',
-    href: 'https://cal.adityajain.ca',
+    href: '/cal',
   },
   {
     name: 'Date Tracker',
     description: 'Logs past dates and saves ideas for future ones.',
     tag: 'React',
-    href: 'https://dates.adityajain.ca',
+    href: '/dates',
   },
   {
     name: 'Spotify Genre Searcher',
     description: 'Opens a genre search for each liked song as it plays.',
     tag: 'Python',
-    href: 'https://genre.adityajain.ca',
+    href: '/genre',
   },
   {
     name: 'Paladins Mod for CK3',
     description: 'Four overpowered, player-only men-at-arms for Crusader Kings III.',
     tag: 'Game mod',
-    href: 'https://paladins.adityajain.ca',
+    href: '/paladins',
   },
 ]
 
