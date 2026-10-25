@@ -66,23 +66,29 @@ export default function VibeThingPage() {
       </PageHero>
 
       <div className="pb-12">
-        <Shot src={img('carthing-home')} alt="VibeThing home screen showing the current song, calendar and weather" />
+        <Shot
+          src={img('carthing-home')}
+          alt="VibeThing home screen showing the current song, calendar and weather"
+          width={800}
+          height={480}
+          eager
+        />
       </div>
 
       <PageSection title="On the Car Thing">
         <FeatureList features={onDevice} />
         <div className="mt-10 grid gap-6 md:grid-cols-3">
-          <Shot src={img('carthing-glance')} alt="Glance screen with clock and widgets" caption="Glance" />
-          <Shot src={img('carthing-pc')} alt="PC screen with system stats and volume mixer" caption="PC stats" />
-          <Shot src={img('carthing-lyrics')} alt="Fullscreen player with synced lyrics" caption="Lyrics" />
+          <Shot width={800} height={480} src={img('carthing-glance')} alt="Glance screen with clock and widgets" caption="Glance" />
+          <Shot width={800} height={480} src={img('carthing-pc')} alt="PC screen with system stats and volume mixer" caption="PC stats" />
+          <Shot width={800} height={480} src={img('carthing-lyrics')} alt="Fullscreen player with synced lyrics" caption="Lyrics" />
         </div>
       </PageSection>
 
       <PageSection title="In the desktop app">
         <FeatureList features={onDesktop} />
         <div className="mt-10 grid gap-6 md:grid-cols-2">
-          <Shot src={img('desktop-screens')} alt="Desktop app screen editor" caption="Building screens" />
-          <Shot src={img('desktop-appearance')} alt="Desktop app appearance settings with live preview" caption="Appearance" />
+          <Shot width={900} height={670} src={img('desktop-screens')} alt="Desktop app screen editor" caption="Building screens" />
+          <Shot width={900} height={670} src={img('desktop-appearance')} alt="Desktop app appearance settings with live preview" caption="Appearance" />
         </div>
       </PageSection>
 

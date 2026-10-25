@@ -13,12 +13,7 @@ import {
 const AMO = 'https://addons.mozilla.org/firefox/addon/atlas-new-tab/'
 const GITHUB = 'https://github.com/adityajain13/AtlasNewTab'
 
-// Screenshots are hosted on the Firefox Add-ons listing.
-const shots = {
-  main: 'https://addons.mozilla.org/user-media/previews/full/377/377613.png?modified=1780445858',
-  settings: 'https://addons.mozilla.org/user-media/previews/full/377/377614.png?modified=1780445848',
-  links: 'https://addons.mozilla.org/user-media/previews/full/377/377615.png?modified=1780445848',
-}
+const img = (name: string) => `/projects/atlas/${name}.webp`
 
 const features: Feature[] = [
   {
@@ -61,7 +56,13 @@ export default function AtlasPage() {
       </PageHero>
 
       <div className="pb-12">
-        <Shot src={shots.main} alt="The Atlas new tab page with a landscape wallpaper, search bar and icon grid" />
+        <Shot
+          src={img('new-tab')}
+          alt="The Atlas new tab page with a misty forest wallpaper, search bar and icon grid"
+          width={1533}
+          height={1290}
+          eager
+        />
       </div>
 
       <PageSection title="Features">
@@ -69,9 +70,28 @@ export default function AtlasPage() {
       </PageSection>
 
       <PageSection title="Screenshots">
-        <div className="grid gap-6 md:grid-cols-2">
-          <Shot src={shots.settings} alt="The Atlas settings panel" caption="Settings panel" />
-          <Shot src={shots.links} alt="The Atlas panel for customizing links" caption="Customizing links" />
+        <div className="grid items-start gap-6 md:grid-cols-3">
+          <Shot
+            src={img('settings-panel')}
+            alt="The Atlas settings panel with wallpaper, search engine, search bar and icon grid options"
+            caption="Settings panel"
+            width={456}
+            height={1286}
+          />
+          <Shot
+            src={img('customize-links')}
+            alt="The Customize Links panel with a label and URL for each of ten links"
+            caption="Customizing links"
+            width={634}
+            height={1007}
+          />
+          <Shot
+            src={img('settings-button')}
+            alt="The settings button on the right edge of the page"
+            caption="The settings button stays tucked away on the right edge until you hover over it."
+            width={845}
+            height={485}
+          />
         </div>
       </PageSection>
 

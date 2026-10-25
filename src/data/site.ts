@@ -43,9 +43,8 @@ export const featuredProjects: FeaturedProject[] = [
       { label: 'Get it on Firefox Add-ons', href: 'https://addons.mozilla.org/firefox/addon/atlas-new-tab/' },
       { label: 'View on GitHub', href: 'https://github.com/adityajain13/AtlasNewTab' },
     ],
-    // Hosted on Atlas's Firefox Add-ons listing (same image the AtlasNewTab README uses)
-    image: 'https://addons.mozilla.org/user-media/previews/full/377/377613.png?modified=1780445858',
-    imageAlt: 'The Atlas new tab page with a landscape wallpaper, search bar and icon grid',
+    image: '/projects/atlas/new-tab.webp',
+    imageAlt: 'The Atlas new tab page with a misty forest wallpaper, search bar and icon grid',
   },
 ]
 
