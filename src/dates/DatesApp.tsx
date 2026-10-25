@@ -25,8 +25,30 @@ function Message({ title, children }: { title: string; children?: React.ReactNod
 
 const signOut = '/dates/auth/logout'
 
+const REMEMBER_KEY = 'datelog-remember'
+
 function SignIn({ next }: { next: '/dates/log' | '/dates/edit' }) {
-  const [remember, setRemember] = useState(false)
+  // On by default; the last choice on this device is kept.
+  const [remember, setRemember] = useState(() => {
+    try {
+      return localStorage.getItem(REMEMBER_KEY) !== '0'
+    } catch {
+      return true
+    }
+  })
+  const choose = (on: boolean) => {
+    setRemember(on)
+    try {
+      localStorage.setItem(REMEMBER_KEY, on ? '1' : '0')
+    } catch {
+      // storage unavailable; the choice still applies to this sign-in
+    }
+  }
+  // Also hand the choice to the Worker in a short-lived cookie, in case the query
+  // string is lost on the way through the Access login.
+  const startSignIn = () => {
+    document.cookie = `datelog_remember=${remember ? '1' : '0'}; Path=/dates/auth; Max-Age=900; Secure; SameSite=Lax`
+  }
   return (
     <div className="mx-auto max-w-sm px-6 pt-28 text-center">
       <p className="mb-4 text-[11px] tracking-[5px] uppercase" style={{ color: PINK }}>
@@ -38,6 +60,7 @@ function SignIn({ next }: { next: '/dates/log' | '/dates/edit' }) {
       </p>
       <a
         href={`/dates/auth/login?next=${next}${remember ? '&remember=1' : ''}`}
+        onClick={startSignIn}
         className="inline-flex min-h-11 items-center rounded-lg px-5 font-sans text-[15px] font-semibold text-[#0d0d0d] transition hover:brightness-110"
         style={{ background: PINK }}
       >
@@ -47,7 +70,7 @@ function SignIn({ next }: { next: '/dates/log' | '/dates/edit' }) {
         <input
           type="checkbox"
           checked={remember}
-          onChange={(e) => setRemember(e.target.checked)}
+          onChange={(e) => choose(e.target.checked)}
           className="size-4 accent-[#ff6b9d]"
         />
         Stay signed in on this device for a year
