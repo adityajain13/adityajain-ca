@@ -10,6 +10,7 @@ import CalPage from './pages/cal'
 import DatesPage from './pages/dates'
 import GenrePage from './pages/genre'
 import PaladinsPage from './pages/paladins'
+import TravelPage from './pages/travel'
 import VibeThingPage from './pages/vibething'
 
 // Output HTML file (relative to dist/) → page component.
@@ -21,6 +22,7 @@ export const pages: Record<string, () => ReactElement> = {
   'paladins/index.html': () => <PaladinsPage />,
   'cal/index.html': () => <CalPage />,
   'dates/index.html': () => <DatesPage />,
+  'travel/index.html': () => <TravelPage />,
 }
 
 export function render(file: string): string {
