@@ -6,8 +6,8 @@ export function Hero() {
       </h1>
       <p className="mt-7 max-w-[60ch] text-lg leading-relaxed text-fg-soft sm:text-xl">
         I'm a developer at Rogers, based in Mississauga. Outside of work I build small things
-        for myself: an app for my Spotify Car Thing, a Firefox new-tab page, a game mod, and a holiday
-        calendar. Some of them are below.
+        for myself: an app for my Spotify Car Thing, a Firefox new-tab page, a game mod, and a date
+        tracker. Some of them are below.
       </p>
       <div className="mt-9 flex flex-wrap gap-3">
         <a
