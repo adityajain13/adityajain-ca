@@ -12,9 +12,10 @@ npm run build    # outputs to dist/
 
 ## Where things live
 
-- **Content:** `src/data/site.ts` holds every project, link and the resume. Search for `TODO` to find the links still to fill in.
+- **Content:** `src/data/site.ts` holds every project, link and the resume.
 - **Colors and fonts:** the `@theme` block in `src/index.css`. The accent is `green-600`; change `--color-accent` to change it everywhere.
-- **Screenshots:** drop them in `public/projects/` and set `image: '/projects/vibething.png'` on the project in `site.ts`. Until then a placeholder box shows.
+- **Screenshots:** drop them in `public/projects/` and set `image: '/projects/<name>.webp'` on the project in `site.ts`. Until then a placeholder box shows.
+- **Pages:** each page component lives in `src/pages/` (the homepage is `src/App.tsx`); `src/entries/` starts them in the browser. `npm run build` pre-renders every public page to static HTML (`src/prerender.tsx`, `scripts/prerender.mjs`), so content loads without waiting for JavaScript.
 
 ## Deploy (Cloudflare Workers)
 
@@ -36,11 +37,11 @@ Old subdomain links (`vibething.adityajain.ca/...`, `www.adityajain.ca`) redirec
 
 Hosting uses two Worker routes, `adityajain.ca/*` and `*.adityajain.ca/*`, with proxied DNS records `@` and `*` (AAAA `100::`).
 
-To add another project page: create `<name>/index.html` and `src/pages/<name>.tsx`, add the entry to `vite.config.ts`, and add `<name>` to `PAGES` in `worker/index.ts`.
+To add another project page: create `<name>/index.html`, `src/pages/<name>.tsx` and `src/entries/<name>.tsx`, then add it to `vite.config.ts`, `src/prerender.tsx` and `PAGES` in `worker/index.ts`.
 
 Local preview of the Worker: `npm run build && npx wrangler dev`, then open `http://127.0.0.1:8787/atlas`.
 
-## Private date tracker (dates.adityajain.ca)
+## Private date tracker (adityajain.ca/dates)
 
 - `/dates/log` shows the log, `/dates/edit` edits it, `/dates/api/me` and `/dates/api/dates` are the API. Data is one JSON document in Workers KV (`DATES_KV`, created automatically on deploy).
 - **Sign-in:** Cloudflare Access (one-time email codes) protects only `/dates/auth/login`. That route verifies the Access JWT and sets the Worker's own signed `__Host-datelog` cookie: for a year if "Stay signed in" is ticked, otherwise until the browser closes (max one day). `/dates/auth/logout` signs out.

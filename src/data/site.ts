@@ -84,7 +84,7 @@ export const otherProjects: OtherProject[] = [
 ]
 
 // Resume shown on the homepage. Update this when the resume changes.
-// To offer the PDF too, put it in public/ (e.g. public/resume.pdf) and set pdf: '/resume.pdf'.
+// The PDF lives at public/Aditya_Jain_Resume.pdf; replace that file to update it.
 export const resume = {
   pdf: '/Aditya_Jain_Resume.pdf',
   summary:

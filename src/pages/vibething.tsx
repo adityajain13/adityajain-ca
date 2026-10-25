@@ -1,7 +1,3 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import '@fontsource-variable/geist'
-import '../index.css'
 import {
   ButtonLink,
   FeatureList,
@@ -56,7 +52,7 @@ const onDesktop: Feature[] = [
   },
 ]
 
-function VibeThingPage() {
+export default function VibeThingPage() {
   return (
     <SubpageLayout>
       <PageHero
@@ -119,9 +115,3 @@ function VibeThingPage() {
     </SubpageLayout>
   )
 }
-
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <VibeThingPage />
-  </StrictMode>,
-)

@@ -8,11 +8,13 @@
   "assets": {
     "directory": "./dist",
     "binding": "ASSETS",
-    // The worker needs to see every request so it can route by hostname.
-    "run_worker_first": true,
+    // The Worker handles page routing, redirects and the dates API. Built files
+    // (hashed JS/CSS, fonts, images, preview cards, the resume PDF) skip it and are
+    // served straight from Cloudflare's asset cache.
+    "run_worker_first": ["/*", "!/assets/*", "!/projects/*", "!/og/*", "!/og.png", "!/favicon.svg", "!/Aditya_Jain_Resume.pdf"],
     "not_found_handling": "404-page"
   },
-  // Storage for the private date tracker (dates.adityajain.ca).
+  // Storage for the private date tracker (adityajain.ca/dates).
   // No id: Wrangler creates the namespace on the first deploy and reuses it after.
   "kv_namespaces": [{ "binding": "DATES_KV" }],
   // Settings for the date tracker are set in the dashboard as secrets; keep them on deploy.

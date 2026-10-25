@@ -30,7 +30,7 @@ export function Contact() {
             </li>
           ))}
         </ul>
-        <span>© {year} {site.name}</span>
+        <span suppressHydrationWarning>© {year} {site.name}</span>
       </div>
     </footer>
   )

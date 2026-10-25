@@ -1,7 +1,4 @@
-import { StrictMode, useState } from 'react'
-import { createRoot } from 'react-dom/client'
-import '@fontsource-variable/geist'
-import '../index.css'
+import { useState } from 'react'
 import { ButtonLink, PageHero, PageSection, Steps, SubpageLayout, inlineLink } from '../components/Subpage'
 
 const FEED = 'https://adityajain.ca/cal/calendar.ics'
@@ -38,7 +35,7 @@ function CopyFeed() {
   )
 }
 
-function CalPage() {
+export default function CalPage() {
   return (
     <SubpageLayout>
       <PageHero
@@ -83,9 +80,3 @@ function CalPage() {
     </SubpageLayout>
   )
 }
-
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <CalPage />
-  </StrictMode>,
-)

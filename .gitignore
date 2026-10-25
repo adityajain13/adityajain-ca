@@ -28,3 +28,6 @@ dist-ssr
 
 # Local Worker secrets (wrangler dev)
 .dev.vars
+
+# Build-time SSR output
+dist-ssr
