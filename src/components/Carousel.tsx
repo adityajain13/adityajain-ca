@@ -26,8 +26,11 @@ export function Carousel({ children, label }: { children: ReactNode; label: stri
   const [viewportRef, embla] = useEmblaCarousel({
     align: 'start',
     containScroll: 'trimSnaps',
-    // Higher is slower and smoother (Embla's default is 25).
+    // Higher is slower and smoother (Embla's default is 25). Used by the arrows and dots.
     duration: 40,
+    // Drags glide with momentum instead of snapping to one card, so you can flick
+    // several times in a row without each drag being pulled back to a snap point.
+    dragFree: true,
   })
   const [canPrev, setCanPrev] = useState(false)
   const [canNext, setCanNext] = useState(true)
@@ -45,9 +48,9 @@ export function Carousel({ children, label }: { children: ReactNode; label: stri
   useEffect(() => {
     if (!embla) return
     update()
-    embla.on('select', update).on('reInit', update)
+    embla.on('select', update).on('reInit', update).on('settle', update)
     return () => {
-      embla.off('select', update).off('reInit', update)
+      embla.off('select', update).off('reInit', update).off('settle', update)
     }
   }, [embla, update])
 
