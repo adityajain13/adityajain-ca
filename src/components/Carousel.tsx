@@ -23,7 +23,12 @@ function Arrow({ dir, disabled, onClick }: { dir: 'prev' | 'next'; disabled: boo
 }
 
 export function Carousel({ children, label }: { children: ReactNode; label: string }) {
-  const [viewportRef, embla] = useEmblaCarousel({ align: 'start', containScroll: 'trimSnaps' })
+  const [viewportRef, embla] = useEmblaCarousel({
+    align: 'start',
+    containScroll: 'trimSnaps',
+    // Higher is slower and smoother (Embla's default is 25).
+    duration: 40,
+  })
   const [canPrev, setCanPrev] = useState(false)
   const [canNext, setCanNext] = useState(true)
   const [snaps, setSnaps] = useState<number[]>([])
