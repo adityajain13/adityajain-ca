@@ -54,7 +54,7 @@ export function Carousel({ children, label }: { children: ReactNode; label: stri
     <div role="region" aria-roledescription="carousel" aria-label={label}>
       <div
         ref={viewportRef}
-        className="overflow-hidden"
+        className="cursor-grab overflow-hidden select-none active:cursor-grabbing [&_a]:[-webkit-user-drag:none]"
         style={{ maskImage: mask, WebkitMaskImage: mask }}
         onKeyDown={(e) => {
           if (e.key === 'ArrowLeft') embla?.scrollPrev()
