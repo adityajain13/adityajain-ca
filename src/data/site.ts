@@ -46,6 +46,18 @@ export const featuredProjects: FeaturedProject[] = [
     image: '/projects/atlas/new-tab.webp',
     imageAlt: 'The Atlas new tab page with a misty forest wallpaper, search bar and icon grid',
   },
+  {
+    name: 'Date Tracker',
+    description:
+      'A private log of dates as chapters, each tagged with a vibe, plus a checklist of ideas for the next one. Sign-in with email codes, separate view and edit access.',
+    tags: ['React', 'TypeScript', 'Cloudflare Workers', 'Cloudflare KV', 'Cloudflare Access'],
+    links: [
+      { label: 'Project page', href: '/dates' },
+      { label: 'View on GitHub', href: 'https://github.com/adityajain13/date-tracker' },
+    ],
+    image: '/projects/dates/example-log.webp',
+    imageAlt: 'The Date Log with example chapters: Coffee & Talking, Mini Golf to Tacos, Museum to Long Walk Home',
+  },
 ]
 
 export type OtherProject = {
@@ -56,12 +68,6 @@ export type OtherProject = {
 }
 
 export const otherProjects: OtherProject[] = [
-  {
-    name: 'Date Tracker',
-    description: 'Logs past dates and saves ideas for future ones.',
-    tag: 'React',
-    href: '/dates',
-  },
   {
     name: 'Spotify Genre Searcher',
     description: 'Opens a genre search for each liked song as it plays.',
