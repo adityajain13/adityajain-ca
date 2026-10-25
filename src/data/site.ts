@@ -25,7 +25,7 @@ export const featuredProjects: FeaturedProject[] = [
     name: 'VibeThing',
     description:
       'My fork of GlanceThing that turns a retired Spotify Car Thing into a desk display connected to my PC.',
-    tags: ['React', 'Electron'],
+    tags: ['React', 'TypeScript', 'Electron', 'Vite', 'WebSockets'],
     links: [
       { label: 'Project page', href: '/vibething' },
       { label: 'View on GitHub', href: 'https://github.com/adityajain13/VibeThing' },
@@ -37,7 +37,7 @@ export const featuredProjects: FeaturedProject[] = [
     name: 'Atlas',
     description:
       'A new-tab page for Firefox with Unsplash wallpapers, multi-engine search and a customizable icon grid. Published on Firefox Add-ons, now at version 1.4.3.',
-    tags: ['Browser extension', 'Unsplash API'],
+    tags: ['JavaScript', 'Tailwind CSS', 'WebExtensions API', 'Unsplash API'],
     links: [
       { label: 'Project page', href: '/atlas' },
       { label: 'Get it on Firefox Add-ons', href: 'https://addons.mozilla.org/firefox/addon/atlas-new-tab/' },
