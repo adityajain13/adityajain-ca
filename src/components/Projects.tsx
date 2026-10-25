@@ -1,4 +1,5 @@
 import { featuredProjects, otherProjects, type FeaturedProject } from '../data/site'
+import { Carousel } from './Carousel'
 import { Section } from './Section'
 
 const isOwnSite = (href: string) =>
@@ -12,7 +13,8 @@ function ProjectImage({ project }: { project: FeaturedProject }) {
         alt={project.imageAlt}
         loading="lazy"
         decoding="async"
-        className="aspect-[5/3] w-full rounded-xl border border-line bg-black object-cover"
+        draggable={false}
+        className="aspect-[5/3] w-full select-none rounded-xl border border-line bg-black object-cover"
       />
     )
   }
@@ -28,9 +30,9 @@ export function Projects() {
   return (
     <>
       <Section id="projects" title="Projects">
-        <div className="grid gap-6 md:grid-cols-2">
+        <Carousel label="Projects">
           {featuredProjects.map((project) => (
-            <article key={project.name} className="flex flex-col gap-5">
+            <article key={project.name} className="flex h-full flex-col gap-5">
               <ProjectImage project={project} />
               <div className="flex flex-col gap-2">
                 <h3 className="text-[22px] font-semibold tracking-tight">{project.name}</h3>
@@ -54,7 +56,7 @@ export function Projects() {
               </div>
             </article>
           ))}
-        </div>
+        </Carousel>
       </Section>
 
       <Section title="Other things I've made">
