@@ -40,6 +40,12 @@ export default {
     const url = new URL(request.url)
     const host = url.hostname
 
+    // Backup for Cloudflare's "Always Use HTTPS": never serve anything over plain HTTP.
+    if (url.protocol === 'http:' && !isLocalHost(host)) {
+      url.protocol = 'https:'
+      return Response.redirect(url.toString(), 301)
+    }
+
     // The main domain (and localhost for `wrangler dev`) serves everything.
     if (host === APEX || isLocalHost(host)) return serveSite(request, env, url)
 
