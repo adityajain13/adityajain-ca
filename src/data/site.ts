@@ -57,12 +57,6 @@ export type OtherProject = {
 
 export const otherProjects: OtherProject[] = [
   {
-    name: 'Ontario Holiday Calendar',
-    description: 'Statutory holidays and other dates from 1997 to 2030.',
-    tag: 'ICS',
-    href: '/cal',
-  },
-  {
     name: 'Date Tracker',
     description: 'Logs past dates and saves ideas for future ones.',
     tag: 'React',
@@ -79,6 +73,12 @@ export const otherProjects: OtherProject[] = [
     description: 'Four overpowered, player-only men-at-arms for Crusader Kings III.',
     tag: 'Game mod',
     href: '/paladins',
+  },
+  {
+    name: 'Ontario Holiday Calendar',
+    description: 'Statutory holidays and other dates from 1997 to 2030.',
+    tag: 'ICS',
+    href: '/cal',
   },
 ]
 
