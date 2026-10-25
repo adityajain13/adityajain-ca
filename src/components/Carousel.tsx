@@ -46,6 +46,35 @@ export function Carousel({ children, label }: { children: ReactNode; label: stri
     }
   }, [embla, update])
 
+  // CSS user-select alone can be overridden (e.g. by "allow copy" extensions), so
+  // also block selection in JS while a drag is in progress.
+  useEffect(() => {
+    if (!embla) return
+    let dragging = false
+    const clear = () => window.getSelection()?.removeAllRanges()
+    const block = (e: Event) => {
+      if (dragging) e.preventDefault()
+    }
+    const start = () => {
+      dragging = true
+      clear()
+    }
+    const stop = () => {
+      dragging = false
+    }
+    const onScroll = () => {
+      if (dragging) clear()
+    }
+    embla.on('pointerDown', start).on('pointerUp', stop).on('scroll', onScroll)
+    document.addEventListener('selectstart', block)
+    window.addEventListener('pointerup', stop)
+    return () => {
+      embla.off('pointerDown', start).off('pointerUp', stop).off('scroll', onScroll)
+      document.removeEventListener('selectstart', block)
+      window.removeEventListener('pointerup', stop)
+    }
+  }, [embla])
+
   const left = canPrev ? 'transparent' : 'black'
   const right = canNext ? 'transparent' : 'black'
   const mask = `linear-gradient(to right, ${left}, black ${FADE}, black calc(100% - ${FADE}), ${right})`
