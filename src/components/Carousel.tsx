@@ -80,6 +80,35 @@ export function Carousel({ children, label }: { children: ReactNode; label: stri
     }
   }, [embla])
 
+  // Stiffer rubber-band at the ends. Embla lets you pull past the first/last card
+  // by up to half the carousel width; this swaps in the same edge logic with a
+  // 10% limit instead. Embla has no option for this, so it patches its engine.
+  useEffect(() => {
+    if (!embla) return
+    const stiffen = () => {
+      const { limit, location, target, scrollBody, percentOfView, scrollBounds } = embla.internalEngine()
+      const tolerance = percentOfView.measure(10)
+      const pullBackThreshold = percentOfView.measure(10)
+      scrollBounds.constrain = (pointerDown: boolean) => {
+        if (!limit.reachedAny(target.get()) || !limit.reachedAny(location.get())) return
+        const edge = limit.reachedMin(location.get()) ? 'min' : 'max'
+        const diffToEdge = Math.abs(limit[edge] - location.get())
+        const diffToTarget = target.get() - location.get()
+        const friction = Math.min(0.99, Math.max(0.1, diffToEdge / tolerance))
+        target.subtract(diffToTarget * friction)
+        if (!pointerDown && Math.abs(diffToTarget) < pullBackThreshold) {
+          target.set(limit.constrain(target.get()))
+          scrollBody.useDuration(25).useBaseFriction()
+        }
+      }
+    }
+    stiffen()
+    embla.on('reInit', stiffen)
+    return () => {
+      embla.off('reInit', stiffen)
+    }
+  }, [embla])
+
   const left = canPrev ? 'transparent' : 'black'
   const right = canNext ? 'transparent' : 'black'
   const mask = `linear-gradient(to right, ${left}, black ${FADE}, black calc(100% - ${FADE}), ${right})`
