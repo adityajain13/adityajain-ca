@@ -43,6 +43,7 @@ export function Projects() {
                     {project.links.map((link) => (
                       <a
                         key={link.href}
+                        draggable={false}
                         href={link.href}
                         // Pages on adityajain.ca open in the same tab; other sites open in a new one.
                         {...(isOwnSite(link.href) ? {} : { target: '_blank', rel: 'noreferrer' })}
