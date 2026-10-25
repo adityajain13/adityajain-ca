@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState, type FormEvent, type ReactNode } from 'react'
-import { Check, Divider, FutureText, LogHeader, PINK, PastRow } from './DateLog'
+import { Check, Divider, FutureText, LogHeader, PastRow } from './DateLog'
+import { PINK } from './colors'
 import {
   cleanLists,
   normalizeImport,

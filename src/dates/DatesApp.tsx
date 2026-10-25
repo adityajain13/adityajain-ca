@@ -1,11 +1,9 @@
 // Private app at adityajain.ca/dates/log (view) and /dates/edit (edit).
 // Signing in goes through /dates/auth/login (Cloudflare Access email code), which sets a session cookie.
 
-import { StrictMode, useEffect, useState } from 'react'
-import { createRoot } from 'react-dom/client'
-import '@fontsource-variable/geist'
-import '../index.css'
-import { DateLog, LogShell, PINK } from './DateLog'
+import { useEffect, useState } from 'react'
+import { DateLog } from './DateLog'
+import { PINK } from './colors'
 import { Editor } from './Editor'
 import type { DatesDoc, Me } from './types'
 
@@ -59,7 +57,7 @@ function SignIn({ next }: { next: '/dates/log' | '/dates/edit' }) {
   )
 }
 
-function App() {
+export default function DatesApp() {
   const wantsEdit = window.location.pathname.startsWith('/dates/edit')
   const [state, setState] = useState<State>({ kind: 'loading' })
 
@@ -128,15 +126,3 @@ function App() {
   )
 }
 
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <LogShell>
-      <nav aria-label="Site" className="mx-auto max-w-[680px] px-5 pt-5 font-sans text-[13px]">
-        <a href="https://adityajain.ca" className="inline-flex min-h-9 items-center gap-1.5 text-[#888] hover:text-[#f0ece0]">
-          <span aria-hidden="true">←</span> adityajain.ca
-        </a>
-      </nav>
-      <App />
-    </LogShell>
-  </StrictMode>,
-)

@@ -1,7 +1,3 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import '@fontsource-variable/geist'
-import '../index.css'
 import {
   ButtonLink,
   FeatureList,
@@ -54,7 +50,7 @@ const perks: Feature[] = [
   },
 ]
 
-function PaladinsPage() {
+export default function PaladinsPage() {
   return (
     <SubpageLayout>
       <PageHero
@@ -127,9 +123,3 @@ function PaladinsPage() {
     </SubpageLayout>
   )
 }
-
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <PaladinsPage />
-  </StrictMode>,
-)

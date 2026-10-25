@@ -1,7 +1,3 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import '@fontsource-variable/geist'
-import '../index.css'
 import {
   ButtonLink,
   FeatureList,
@@ -51,7 +47,7 @@ const features: Feature[] = [
   },
 ]
 
-function AtlasPage() {
+export default function AtlasPage() {
   return (
     <SubpageLayout>
       <PageHero
@@ -104,9 +100,3 @@ function AtlasPage() {
     </SubpageLayout>
   )
 }
-
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <AtlasPage />
-  </StrictMode>,
-)

@@ -1,7 +1,3 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import '@fontsource-variable/geist'
-import '../index.css'
 import {
   ButtonLink,
   FeatureList,
@@ -41,7 +37,7 @@ const notes: Feature[] = [
   },
 ]
 
-function GenrePage() {
+export default function GenrePage() {
   return (
     <SubpageLayout>
       <PageHero
@@ -99,9 +95,3 @@ function GenrePage() {
     </SubpageLayout>
   )
 }
-
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <GenrePage />
-  </StrictMode>,
-)

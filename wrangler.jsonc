@@ -6,7 +6,7 @@
   "assets": {
     "directory": "./dist",
     "binding": "ASSETS",
-    "run_worker_first": true,
+    "run_worker_first": ["/*", "!/assets/*", "!/projects/*", "!/og/*", "!/og.png", "!/favicon.svg", "!/Aditya_Jain_Resume.pdf"],
     "not_found_handling": "404-page"
   },
   "kv_namespaces": [{ "binding": "DATES_KV" }],

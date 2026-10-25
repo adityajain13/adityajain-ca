@@ -7,7 +7,7 @@
   --color-accent: var(--color-green-600);
 
   --color-ink: #0f0f0e;        /* page background */
-  --color-surface: #161615;    /* cards, the "Currently" box */
+  --color-surface: #161615;    /* cards and panels */
   --color-placeholder: #1a1a18;
   --color-line: #262624;       /* dividers */
   --color-line-strong: #3a3936;

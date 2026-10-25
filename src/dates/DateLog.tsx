@@ -1,23 +1,9 @@
 import type { ReactNode } from 'react'
+import { PINK, VIBE_COLORS } from './colors'
 import { sortPast, type FutureDate, type PastDate, type Vibe } from './types'
 
 // The look of the original DateTracker.jsx: Georgia, warm off-white, pink accent.
 
-export const VIBE_COLORS: Record<Vibe, string> = {
-  'first sparks': '#f4a261',
-  playful: '#48cae4',
-  adventurous: '#8ecae6',
-  'easy & warm': '#e9c46a',
-  cozy: '#f9c74f',
-  'the one': '#ff6b9d',
-  golden: '#ffd60a',
-  'silly & sweet': '#c77dff',
-  spontaneous: '#52b788',
-  creative: '#a8dadc',
-  meaningful: '#b5838d',
-}
-
-export const PINK = '#ff6b9d'
 
 export function LogShell({ children }: { children: ReactNode }) {
   return (
