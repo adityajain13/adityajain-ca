@@ -71,15 +71,33 @@ export function ButtonLink({
   )
 }
 
-export function Shot({ src, alt, caption }: { src: string; alt: string; caption?: string }) {
+export function Shot({
+  src,
+  alt,
+  caption,
+  width,
+  height,
+  eager = false,
+}: {
+  src: string
+  alt: string
+  caption?: string
+  /** Intrinsic size, so the browser reserves space before the image loads. */
+  width?: number
+  height?: number
+  /** Load straight away (for the first image on a page) instead of lazily. */
+  eager?: boolean
+}) {
   return (
     <figure className="flex flex-col gap-3">
       <img
         src={src}
         alt={alt}
-        loading="lazy"
-        referrerPolicy="no-referrer"
-        className="w-full rounded-xl border border-line bg-black"
+        width={width}
+        height={height}
+        loading={eager ? 'eager' : 'lazy'}
+        decoding="async"
+        className="h-auto w-full rounded-xl border border-line bg-black"
       />
       {caption ? <figcaption className="text-sm text-subtle">{caption}</figcaption> : null}
     </figure>

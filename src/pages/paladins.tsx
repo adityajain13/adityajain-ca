@@ -74,6 +74,9 @@ export default function PaladinsPage() {
       <div className="pb-12">
         <Shot
           src="/projects/paladins/banner.webp"
+          width={1280}
+          height={720}
+          eager
           alt="Paladins: four elite men-at-arms. Paladin Infantry, Cavalry, Crossbows and Bombards"
         />
         <p className="mt-4 text-sm text-subtle">

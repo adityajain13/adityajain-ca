@@ -11,8 +11,8 @@ function ProjectImage({ project }: { project: FeaturedProject }) {
         src={project.image}
         alt={project.imageAlt}
         loading="lazy"
-        referrerPolicy="no-referrer"
-        className="aspect-[5/3] w-full rounded-xl border border-line bg-black object-cover object-top"
+        decoding="async"
+        className="aspect-[5/3] w-full rounded-xl border border-line bg-black object-cover"
       />
     )
   }
