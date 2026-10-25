@@ -25,7 +25,7 @@ interface Env extends DatesEnv {
 const APEX = 'adityajain.ca'
 
 // Project pages: path segment → folder in dist/ (each folder has an index.html).
-const PAGES = ['atlas', 'vibething', 'genre', 'paladins', 'cal', 'dates'] as const
+const PAGES = ['atlas', 'vibething', 'genre', 'paladins', 'cal', 'dates', 'travel'] as const
 type Page = (typeof PAGES)[number]
 const isPage = (s: string): s is Page => (PAGES as readonly string[]).includes(s)
 

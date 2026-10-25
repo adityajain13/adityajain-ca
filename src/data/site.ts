@@ -31,6 +31,19 @@ export const featuredProjects: FeaturedProject[] = [
     imageAlt: 'The adityajain.ca homepage with the heading "Hi, I\'m Aditya." and buttons to view projects or get in touch',
   },
   {
+    name: 'Travel Planner',
+    description:
+      'My own take on Wanderlog. Plans trips day by day with routes between stops, reservations and a split budget, works offline, syncs live and shares by link.',
+    tags: ['React', 'TypeScript', 'Yjs', 'Cloudflare Durable Objects', 'MapLibre', 'PWA'],
+    links: [
+      { label: 'Project page', href: '/travel' },
+      { label: 'Open the app', href: '/travelplanner' },
+      { label: 'View on GitHub', href: 'https://github.com/adityajain13/TravelPlanner' },
+    ],
+    image: '/projects/travel/card.webp',
+    imageAlt: 'A trip to Iceland in Travel Planner, showing the itinerary, reservations and budget tabs',
+  },
+  {
     name: 'VibeThing',
     description:
       'My fork of GlanceThing that turns a retired Spotify Car Thing into a desk display connected to my PC.',
