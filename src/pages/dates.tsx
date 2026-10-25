@@ -50,15 +50,13 @@ export default function DatesPage() {
         title="Date Tracker"
         tagline="A small app for keeping a log of dates as chapters, each with its own vibe, plus a running list of ideas for the next one."
       >
-        <ButtonLink href={GITHUB} primary>
-          View on GitHub
-        </ButtonLink>
         <a
           href="/dates/log"
-          className="inline-flex min-h-11 items-center rounded-lg border border-line-strong px-[18px] text-[15px] transition-colors hover:border-subtle"
+          className="inline-flex min-h-11 items-center rounded-lg bg-accent px-[18px] text-[15px] font-semibold text-ink transition hover:brightness-110"
         >
           Sign in
         </a>
+        <ButtonLink href={GITHUB}>View on GitHub</ButtonLink>
       </PageHero>
 
       <PageSection title="What it looks like">

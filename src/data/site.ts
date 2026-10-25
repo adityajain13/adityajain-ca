@@ -37,7 +37,7 @@ export const featuredProjects: FeaturedProject[] = [
     tags: ['React', 'TypeScript', 'Yjs', 'Cloudflare Durable Objects', 'MapLibre', 'PWA'],
     links: [
       { label: 'Project page', href: '/travel' },
-      { label: 'Open the app', href: '/travelplanner' },
+      { label: 'Sign in', href: '/travelplanner' },
       { label: 'View on GitHub', href: 'https://github.com/adityajain13/TravelPlanner' },
     ],
     image: '/projects/travel/card.webp',
@@ -75,6 +75,7 @@ export const featuredProjects: FeaturedProject[] = [
     tags: ['React', 'TypeScript', 'Cloudflare Workers', 'Cloudflare KV', 'Cloudflare Access'],
     links: [
       { label: 'Project page', href: '/dates' },
+      { label: 'Sign in', href: '/dates/log' },
       { label: 'View on GitHub', href: 'https://github.com/adityajain13/date-tracker' },
     ],
     image: '/projects/dates/example-log.webp',
