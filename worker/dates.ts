@@ -44,18 +44,33 @@ const ORIGIN = 'https://adityajain.ca'
 const MAX_BODY_BYTES = 512 * 1024
 
 const COOKIE = '__Host-datelog'
+// Set by the sign-in page just before it hands off to Access, so the "stay signed in"
+// choice survives the trip through the Access login even if the query string doesn't.
+const REMEMBER_COOKIE = 'datelog_remember'
 const YEAR = 365 * 24 * 60 * 60
 const DAY = 24 * 60 * 60
 const AFTER_LOGIN = new Set(['/dates/log', '/dates/edit'])
 
 export async function handleDatesApi(request: Request, env: DatesEnv, url: URL): Promise<Response> {
-  const email = await signedInEmail(request, env, url)
-  if (!email) return json({ error: 'Not signed in' }, 401)
+  const session = await signedInSession(request, env, url)
+  if (!session) return json({ error: 'Not signed in' }, 401)
+  const { email } = session
   const role = roleFor(email, env)
   if (!role) return json({ error: 'This email is not allowed' }, 403)
   const me: Me = { email, role }
 
-  if (url.pathname === '/dates/api/me' && request.method === 'GET') return json(me)
+  if (url.pathname === '/dates/api/me' && request.method === 'GET') {
+    const res = json(me)
+    // Remembered sessions slide: each visit (at most once a day) restarts the year,
+    // so a device that's used regularly never gets signed out.
+    const now = Math.floor(Date.now() / 1000)
+    const secret = sessionSecret(env)
+    const remembered = session.r ?? session.exp - session.iat > DAY // older cookies have no r flag
+    if (remembered && secret && now - session.iat > DAY) {
+      res.headers.append('set-cookie', await sessionCookie(email, true, secret))
+    }
+    return res
+  }
 
   if (url.pathname === '/dates/api/dates') {
     if (request.method === 'GET') return json(await load(env))
@@ -164,16 +179,32 @@ export async function handleDatesAuth(request: Request, env: DatesEnv, url: URL)
   const secret = sessionSecret(env)
   if (!secret) return new Response('Sign-in is not set up correctly.', { status: 503 })
 
-  const remember = url.searchParams.get('remember') === '1'
-  const now = Math.floor(Date.now() / 1000)
-  const token = await signSession({ email, iat: now, exp: now + (remember ? YEAR : DAY) }, secret)
-  // A remembered session persists for a year; otherwise the cookie goes away when the browser closes.
-  const cookie = `${COOKIE}=${token}; Path=/; HttpOnly; Secure; SameSite=Lax${remember ? `; Max-Age=${YEAR}` : ''}`
-  return redirect(next, cookie)
+  const rememberCookie = readCookie(request, REMEMBER_COOKIE)
+  const remember = url.searchParams.get('remember') === '1' || rememberCookie === '1'
+  return redirect(next, await sessionCookie(email, remember, secret), clearRememberCookie())
 }
 
-function redirect(location: string, cookie: string): Response {
-  return new Response(null, { status: 302, headers: { location, 'set-cookie': cookie, 'cache-control': 'no-store' } })
+/** A remembered session persists for a year; otherwise the cookie goes away when the browser closes. */
+async function sessionCookie(email: string, remember: boolean, secret: string): Promise<string> {
+  const now = Math.floor(Date.now() / 1000)
+  const token = await signSession({ email, iat: now, exp: now + (remember ? YEAR : DAY), r: remember }, secret)
+  return `${COOKIE}=${token}; Path=/; HttpOnly; Secure; SameSite=Lax${remember ? `; Max-Age=${YEAR}` : ''}`
+}
+
+function redirect(location: string, ...cookies: string[]): Response {
+  const headers = new Headers({ location, 'cache-control': 'no-store' })
+  for (const c of cookies) headers.append('set-cookie', c)
+  return new Response(null, { status: 302, headers })
+}
+
+const clearRememberCookie = () => `${REMEMBER_COOKIE}=; Path=/dates/auth; Secure; SameSite=Lax; Max-Age=0`
+
+function readCookie(request: Request, name: string): string | undefined {
+  return (request.headers.get('cookie') ?? '')
+    .split(';')
+    .map((c) => c.trim())
+    .find((c) => c.startsWith(`${name}=`))
+    ?.slice(name.length + 1)
 }
 
 const clearCookie = () => `${COOKIE}=; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0`
@@ -183,25 +214,20 @@ function sessionSecret(env: DatesEnv): string | null {
   return s && s.length >= 32 ? s : null // fail closed if missing or too short
 }
 
-async function signedInEmail(request: Request, env: DatesEnv, url: URL): Promise<string | null> {
+async function signedInSession(request: Request, env: DatesEnv, url: URL): Promise<Session | null> {
   // Local testing with `wrangler dev` only.
-  if (env.DEV_AUTH_EMAIL && isLocal(url) && !sessionSecret(env)) return env.DEV_AUTH_EMAIL
+  if (env.DEV_AUTH_EMAIL && isLocal(url) && !sessionSecret(env)) return { email: env.DEV_AUTH_EMAIL, iat: 0, exp: 0 }
 
   const secret = sessionSecret(env)
   if (!secret) return null
-  const raw = (request.headers.get('cookie') ?? '')
-    .split(';')
-    .map((c) => c.trim())
-    .find((c) => c.startsWith(`${COOKIE}=`))
-    ?.slice(COOKIE.length + 1)
+  const raw = readCookie(request, COOKIE)
   if (!raw) return null
-  const session = await verifySession(raw, secret)
-  return session?.email ?? null
+  return verifySession(raw, secret)
 }
 
 // ---- Session cookies: base64url(JSON payload) + "." + base64url(HMAC-SHA256) ----
 
-type Session = { email: string; iat: number; exp: number }
+type Session = { email: string; iat: number; exp: number; r?: boolean } // r: remembered on this device
 
 const enc = new TextEncoder()
 const bytesToB64url = (bytes: Uint8Array) =>
