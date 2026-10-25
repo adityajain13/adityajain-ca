@@ -22,6 +22,15 @@ export type FeaturedProject = {
 
 export const featuredProjects: FeaturedProject[] = [
   {
+    name: 'adityajain.ca',
+    description:
+      'This website. Pages are prerendered at build time and served from a Cloudflare Worker, which also runs the redirects, the holiday calendar feed and the sign-in for the date tracker.',
+    tags: ['React', 'TypeScript', 'Tailwind CSS', 'Vite', 'Cloudflare Workers'],
+    links: [{ label: 'View on GitHub', href: 'https://github.com/adityajain13/adityajain-ca' }],
+    image: '/projects/site/home.webp',
+    imageAlt: 'The adityajain.ca homepage with the heading "Hi, I\'m Aditya." and buttons to view projects or get in touch',
+  },
+  {
     name: 'VibeThing',
     description:
       'My fork of GlanceThing that turns a retired Spotify Car Thing into a desk display connected to my PC.',
