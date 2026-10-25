@@ -13,9 +13,9 @@ function Arrow({ dir, disabled, onClick }: { dir: 'prev' | 'next'; disabled: boo
       onClick={onClick}
       disabled={disabled}
       aria-label={dir === 'prev' ? 'Previous project' : 'Next project'}
-      className="group flex size-11 items-center justify-center rounded-full border border-line-strong text-accent transition-colors hover:border-accent disabled:pointer-events-none disabled:opacity-30"
+      className="group flex size-11 items-center justify-center rounded-full border border-accent text-accent transition-colors hover:bg-accent/10 disabled:pointer-events-none disabled:opacity-30"
     >
-      <svg aria-hidden="true" viewBox="0 0 16 16" className="size-4 [stroke-width:2.75] transition-[stroke-width] group-hover:[stroke-width:3.5]" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round">
+      <svg aria-hidden="true" viewBox="0 0 16 16" className="size-4 [stroke-width:3.75] transition-[stroke-width] group-hover:[stroke-width:4.5]" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round">
         {dir === 'prev' ? <path d="M10 3 5 8l5 5" /> : <path d="m6 3 5 5-5 5" />}
       </svg>
     </button>
