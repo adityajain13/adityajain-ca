@@ -68,8 +68,9 @@ export default function TravelPage() {
   return (
     <SubpageLayout>
       <PageHero
-        title="Travel Planner"
-        tagline="My own take on Wanderlog. A trip planner that works offline, is dark down to the map, and syncs live, with reservations, a shared budget and routes between every stop."
+        icon={<img src="/projects/travel/icon.svg" alt="Atlas Journeys icon: a green globe" width={88} height={88} />}
+        title="Atlas Journeys"
+        tagline="My own take on Wanderlog, and a sibling of Atlas New Tab. A trip planner that works offline, is dark down to the map, and syncs live, with reservations, a shared budget and routes between every stop."
       >
         <a
           href={APP}

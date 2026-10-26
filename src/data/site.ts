@@ -31,7 +31,7 @@ export const featuredProjects: FeaturedProject[] = [
     imageAlt: 'The adityajain.ca homepage with the heading "Hi, I\'m Aditya." and buttons to view projects or get in touch',
   },
   {
-    name: 'Travel Planner',
+    name: 'Atlas Journeys',
     description:
       'My own take on Wanderlog. Plans trips day by day with routes between stops, reservations and a split budget, works offline, syncs live and shares by link.',
     tags: ['React', 'TypeScript', 'Yjs', 'Cloudflare Durable Objects', 'MapLibre', 'PWA'],
@@ -41,7 +41,7 @@ export const featuredProjects: FeaturedProject[] = [
       { label: 'View on GitHub', href: 'https://github.com/adityajain13/TravelPlanner' },
     ],
     image: '/projects/travel/card.webp',
-    imageAlt: 'A trip to Iceland in Travel Planner, showing the itinerary, reservations and budget tabs',
+    imageAlt: 'A trip to Iceland in Atlas Journeys, showing the itinerary, reservations and budget tabs',
   },
   {
     name: 'VibeThing',
@@ -116,7 +116,7 @@ export const otherProjects: OtherProject[] = [
 export const resume = {
   pdf: '/Aditya_Jain_Resume.pdf',
   summary:
-    'Front-end developer with 5+ years building and owning the customer-facing e-commerce experience for tsc.ca, the Rogers-owned national retailer with about 800K monthly visits.',
+    'Front-end developer with 5+ years building and owning the customer-facing e-commerce experience for tsc.ca, the Rogers-owned national retailer with about 800K monthly visits. I take features from Figma to production on my own, and work with an AI-first development workflow.',
   experience: [
     {
       company: 'Rogers Communications · TSC (tsc.ca)',
@@ -124,25 +124,27 @@ export const resume = {
       dates: 'May 2021 – Present',
       points: [
         'One of two front-end developers for tsc.ca. I own features end to end, from Figma mocks to production, shipping a major feature and 2–4 enhancements every sprint.',
-        'Migrated the entire legacy Angular front end to React and TypeScript, including the shopping bag, My Account and the live TV schedule.',
-        'Redesigned the Algolia-powered product search page as part of a customer retention push that increased add-to-cart rates.',
-        'Built front-end features for the TSC Marketplace, which lets hundreds of third-party vendors sell on tsc.ca.',
-        'Wrote custom Contentful plugins so the content team can configure site components without waiting for a deployment.',
-        'Built reusable, screen-reader-tested React, TypeScript and Tailwind components used across the site, and fixed dozens of Lighthouse performance findings.',
-        'Mentor new developers, represent front end in sprint planning, and maintain C#/.NET services such as internal gift card tools.',
+        'Migrated the entire legacy Angular front end to React and TypeScript, including the shopping bag, My Account and the live TV schedule, which cut bundle size, load times and defects.',
+        'Redesigned the Algolia-powered product search page, the site’s main search, as part of a customer retention push that increased add-to-cart rates.',
+        'Built front-end features for the TSC Marketplace, which lets hundreds of approved third-party vendors sell thousands of products on tsc.ca.',
+        'Wrote custom Contentful plugins so the content team can configure every part of site components and publish on demand, instead of waiting for an end-of-sprint deployment.',
+        'Built reusable, screen-reader-tested React, TypeScript and Tailwind components used across the whole site.',
+        'Fixed dozens of Lighthouse performance findings with lazy loading, image compression and code splitting. The lazy-loading work was recognized by the business team.',
+        'Shortened PR review cycles by building to SonarQube and internal best-practice standards, and brought AI coding assistants into daily development.',
+        'Mentor and onboard new developers, represent front end in sprint planning, lead projects independently, and maintain C#/.NET services such as internal gift card tools.',
       ],
     },
     {
       company: 'Royal Bank of Canada',
       role: 'Developer (Co-op)',
       dates: 'May – Aug 2019',
-      points: ['Built REST APIs in C# and .NET Core, and reusable API templates that cut duplicated code across the team.'],
+      points: ['Built REST APIs in C# and .NET Core, and reusable API templates that standardized backend patterns and cut duplicated code across the team.'],
     },
     {
       company: 'Royal Bank of Canada',
       role: 'Technical Analyst (Co-op)',
       dates: 'May – Aug 2017',
-      points: ['Built a Java webhook framework that automated manual CI steps, and rewrote the team’s technical documentation.'],
+      points: ['Built a Java webhook framework that automated manual CI steps, and rewrote the team’s technical documentation to speed up onboarding.'],
     },
   ],
   education: [
@@ -156,10 +158,10 @@ export const resume = {
   ],
   certifications: ['Microsoft Azure Fundamentals (AZ-900)', 'Microsoft Azure AI Fundamentals (AI-900)'],
   skills: [
-    { group: 'Front end', items: 'React, TypeScript, JavaScript, HTML, CSS, Tailwind CSS, React Query, Webpack, Vite' },
-    { group: 'CMS, search & APIs', items: 'Contentful (incl. custom plugins), Algolia, REST APIs' },
+    { group: 'Front end', items: 'React, TypeScript, JavaScript (ES6+), HTML, CSS, Tailwind CSS, React Query, Webpack, Vite' },
+    { group: 'CMS, search & APIs', items: 'Contentful (headless CMS, custom plugins), Algolia, REST APIs, third-party API integration' },
     { group: 'Back end', items: 'C#, .NET / .NET Core, Node.js, SQL, Python' },
-    { group: 'Practices', items: 'Performance (Lighthouse), accessibility, A/B testing, feature flags, code review, Agile' },
+    { group: 'Practices', items: 'Performance (Lighthouse), accessibility (screen reader testing), A/B testing, feature flags, code review, Agile/Scrum' },
     { group: 'Tools', items: 'Git, Azure DevOps, Azure, CI/CD, SonarQube, Docker, Figma, Jira, AI coding assistants' },
   ],
 }
