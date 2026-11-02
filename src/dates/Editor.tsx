@@ -311,33 +311,38 @@ export function Editor({ me, initial }: { me: Me; initial: DatesDoc }) {
     <>
       {/* Toolbar */}
       <div className="sticky top-0 z-10 border-b border-white/5 bg-[#0d0d0d]/90 font-sans backdrop-blur">
-        <div className="mx-auto flex max-w-[680px] flex-wrap items-center gap-x-3 gap-y-2 px-5 py-3">
+        <div className="mx-auto flex max-w-[680px] flex-wrap items-center gap-x-3 gap-y-1 px-5 py-3">
           <span
             role="status"
-            className={`min-w-0 flex-1 text-[13px] ${status.kind === 'error' ? 'text-[#ff8a8a]' : dirty ? 'text-[#f0ece0]' : 'text-[#888]'}`}
+            title={statusText}
+            className={`min-w-0 flex-1 truncate whitespace-nowrap text-[13px] ${status.kind === 'error' ? 'text-[#ff8a8a]' : dirty ? 'text-[#f0ece0]' : 'text-[#888]'}`}
           >
             {statusText}
           </span>
-          <a href="/dates/log" className="min-h-9 content-center rounded-md px-2.5 text-[13px] text-[#aaa] hover:bg-white/5 hover:text-[#f0ece0]">
-            View
-          </a>
-          <TextButton onClick={exportJson}>Export</TextButton>
-          <TextButton onClick={() => fileRef.current?.click()}>Import</TextButton>
-          <input
-            ref={fileRef}
-            type="file"
-            accept="application/json,.json"
-            className="hidden"
-            onChange={(e) => {
-              const f = e.target.files?.[0]
-              if (f) void importJson(f)
-              e.target.value = ''
-            }}
-          />
-          {dirty ? <TextButton onClick={() => loadLatest(base)}>Discard</TextButton> : null}
-          <PrimaryButton onClick={save} disabled={!dirty || status.kind === 'saving'}>
-            Save
-          </PrimaryButton>
+          <div className="order-last -ml-2.5 flex w-full items-center gap-1 sm:order-none sm:ml-0 sm:w-auto">
+            <a href="/dates/log" className="min-h-9 content-center rounded-md px-2.5 text-[13px] text-[#aaa] hover:bg-white/5 hover:text-[#f0ece0]">
+              View
+            </a>
+            <TextButton onClick={exportJson}>Export</TextButton>
+            <TextButton onClick={() => fileRef.current?.click()}>Import</TextButton>
+            <input
+              ref={fileRef}
+              type="file"
+              accept="application/json,.json"
+              className="hidden"
+              onChange={(e) => {
+                const f = e.target.files?.[0]
+                if (f) void importJson(f)
+                e.target.value = ''
+              }}
+            />
+            {dirty ? <TextButton onClick={() => loadLatest(base)}>Discard</TextButton> : null}
+          </div>
+          <div className="shrink-0">
+            <PrimaryButton onClick={save} disabled={!dirty || status.kind === 'saving'}>
+              Save
+            </PrimaryButton>
+          </div>
         </div>
         {status.kind === 'conflict' ? (
           <div className="mx-auto flex max-w-[680px] flex-wrap items-center gap-2 px-5 pb-3 text-[13px] text-[#ffd60a]">
@@ -348,7 +353,15 @@ export function Editor({ me, initial }: { me: Me; initial: DatesDoc }) {
         ) : null}
       </div>
 
-      <LogHeader count={sorted.length} kicker={`editing as ${me.email}`} />
+      <LogHeader
+        count={sorted.length}
+        kicker={
+          <>
+            editing as
+            <span className="mt-1.5 block truncate px-2 text-[12px] tracking-[0.5px] normal-case">{me.email}</span>
+          </>
+        }
+      />
 
       <div className="mx-auto max-w-[680px] px-5">
         <section aria-label="Past dates">

@@ -26,7 +26,7 @@ export function LogShell({ children }: { children: ReactNode }) {
   )
 }
 
-export function LogHeader({ count, kicker = 'our little story' }: { count: number; kicker?: string }) {
+export function LogHeader({ count, kicker = 'our little story' }: { count: number; kicker?: ReactNode }) {
   return (
     <header className="px-6 pt-16 pb-10 text-center">
       <p className="mb-4 text-[11px] tracking-[5px] uppercase" style={{ color: PINK }}>
