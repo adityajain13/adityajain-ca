@@ -11,6 +11,7 @@ import DatesPage from './pages/dates'
 import GenrePage from './pages/genre'
 import PaladinsPage from './pages/paladins'
 import TravelPage from './pages/travel'
+import MealsPage from './pages/meals'
 import VibeThingPage from './pages/vibething'
 
 // Output HTML file (relative to dist/) → page component.
@@ -23,6 +24,7 @@ export const pages: Record<string, () => ReactElement> = {
   'cal/index.html': () => <CalPage />,
   'dates/index.html': () => <DatesPage />,
   'travel/index.html': () => <TravelPage />,
+  'meals/index.html': () => <MealsPage />,
 }
 
 export function render(file: string): string {

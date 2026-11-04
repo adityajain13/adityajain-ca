@@ -18,6 +18,7 @@ export default defineConfig({
         genre: page('./genre/index.html'),
         dates: page('./dates/index.html'),
         travel: page('./travel/index.html'),
+        meals: page('./meals/index.html'),
         paladins: page('./paladins/index.html'),
         datesApp: page('./dates-app/index.html'),
       },
