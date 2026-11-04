@@ -44,6 +44,18 @@ export const featuredProjects: FeaturedProject[] = [
     imageAlt: 'A trip to Iceland in Atlas Journeys, showing the itinerary, reservations and budget tabs',
   },
   {
+    name: 'Atlas Provisions',
+    description:
+      'Plans a week of home-cooked meals around local grocery flyer deals, a budget and what everyone can eat, then builds a shopping list by store and a batch-prep list. Another of my Atlas apps.',
+    tags: ['React', 'TypeScript', 'Hono', 'Cloudflare D1', 'Claude API'],
+    links: [
+      { label: 'Sign in', href: '/provisions' },
+      { label: 'View on GitHub', href: 'https://github.com/adityajain13/atlas-provisions' },
+    ],
+    image: '/projects/provisions/week.webp',
+    imageAlt: 'The Atlas Provisions week view: a grid of breakfasts, lunches and dinners with costs, and a $129.71 of $150 budget bar',
+  },
+  {
     name: 'VibeThing',
     description:
       'My fork of GlanceThing that turns a retired Spotify Car Thing into a desk display connected to my PC.',
