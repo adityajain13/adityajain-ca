@@ -49,6 +49,7 @@ export const featuredProjects: FeaturedProject[] = [
       'Plans a week of home-cooked meals around local grocery flyer deals, a budget and what everyone can eat, then builds a shopping list by store and a batch-prep list. Another of my Atlas apps.',
     tags: ['React', 'TypeScript', 'Hono', 'Cloudflare D1', 'Claude API'],
     links: [
+      { label: 'Project page', href: '/meals' },
       { label: 'Sign in', href: '/provisions' },
       { label: 'View on GitHub', href: 'https://github.com/adityajain13/atlas-provisions' },
     ],
