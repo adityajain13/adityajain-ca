@@ -175,6 +175,12 @@ export default function MealsPage() {
           ))}
         </dl>
       </PageSection>
+
+      <PageSection title="Credits">
+        <p className="max-w-[64ch] leading-relaxed text-muted">
+          The idea of planning meals around the weekly grocery flyers came from my girlfriend, Nivi.
+        </p>
+      </PageSection>
     </SubpageLayout>
   )
 }
