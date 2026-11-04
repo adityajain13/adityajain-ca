@@ -71,7 +71,7 @@ export default function MealsPage() {
       <PageHero
         icon={<img src="/projects/provisions/icon.svg" alt="Atlas Provisions icon: a green globe" width={88} height={88} />}
         title="Atlas Provisions"
-        tagline="A weekly meal planner, and another of my Atlas apps. It plans a week of home-cooked meals around local grocery flyer deals, a budget and what everyone in the house can eat, then builds the shopping list and a prep list."
+        tagline="A weekly meal planner, and another of my Atlas apps. It plans a week of home-cooked meals around local grocery flyer deals, a budget and what everyone in the house can eat, then builds the shopping list and a prep list. The idea for the app, one that plans our meals around the grocery flyers, came from my girlfriend, Nivi."
       >
         <a
           href={APP}
@@ -174,12 +174,6 @@ export default function MealsPage() {
             </div>
           ))}
         </dl>
-      </PageSection>
-
-      <PageSection title="Credits">
-        <p className="max-w-[64ch] leading-relaxed text-muted">
-          The idea of planning meals around the weekly grocery flyers came from my girlfriend, Nivi.
-        </p>
       </PageSection>
     </SubpageLayout>
   )
