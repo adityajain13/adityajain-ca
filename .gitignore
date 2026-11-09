@@ -30,4 +30,7 @@ dist-ssr
 .dev.vars
 
 # Build-time SSR output
-dist-ssr
+
+.env
+.env.*
+.dev.vars.*
